@@ -17,6 +17,6 @@ namespace TrainSchedule.RepositoryInterfaces
         /// </summary>
         /// <param name="id">ID of object to get</param>
         /// <returns>Recieved object</returns>
-        T getById(uint id);
+        T GetById(uint id);
     }
 }

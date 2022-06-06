@@ -10,27 +10,27 @@ namespace TrainSchedule.Repositories
 {
     public class MySqlDbLocalityRepository : ILocalityRepository
     {
-        public Locality append(Locality newLocality)
+        public Locality Append(Locality newLocality)
         {
             throw new NotImplementedException();
         }
 
-        public Locality update(Locality locality)
+        public Locality Update(Locality locality)
         {
             throw new NotImplementedException();
         }
 
-        public Locality getByName(string name)
+        public Locality GetByName(string name)
         {
             throw new NotSupportedException();
         }
 
-        public void delete(Locality locality)
+        public void Delete(Locality locality)
         {
 
         }
 
-        public Locality getById(uint id)
+        public Locality GetById(uint id)
         {
             throw new NotImplementedException();
         }
