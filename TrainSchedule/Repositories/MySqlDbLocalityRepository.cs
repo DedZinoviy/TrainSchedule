@@ -52,7 +52,31 @@ namespace TrainSchedule.Repositories
 
         public Locality GetById(long id)
         {
-            throw new NotImplementedException();
+            Locality newLocality = null; // Считать,что изначально объекта с указанным id в таблице нет.
+
+            string sql = @"SELECT * FROM trains.localities WHERE idlocalities = @id_loc"; // Сформировать SQL-запрос на получение объекта с указанным id.
+            using MySqlConnection connection = ConnectUtil.GetConnection(); // Создать соединение с БД MySQL
+            connection.Open(); // Открыть соединение.
+
+            try // Попытаться...
+            {
+                using MySqlCommand command = new MySqlCommand(sql,connection); // Сформировать готовый SQL-запрос на получение объекта с заданным id.
+                command.Parameters.AddWithValue("@id_loc", id); // Присвоить значения параметров SQL-запросу.
+
+                using MySqlDataReader reader = command.ExecuteReader(); // Считать объект и БД.
+
+                if (reader.Read()) // Сформировать возвращаемый объект, если считать данные из БД удалось.
+                {
+                    long recievedId = reader.GetInt32(0); // Считать значение id
+                    string recievedName = reader.GetString(1); // Считать название locality
+                    newLocality = new Locality(recievedId, recievedName); // Создать возвращаемый объект.
+                }
+                return newLocality; // Вернуть объект.
+            }
+            catch(MySqlException exception) // Иначе...
+            {
+                throw new RepositoryException(exception.ErrorCode, exception.Message); // Сообщить об ошибке
+            }
         }
     }
 }
