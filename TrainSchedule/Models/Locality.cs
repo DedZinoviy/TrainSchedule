@@ -12,7 +12,7 @@ namespace TrainSchedule.Models
     public class Locality
     {
         ///<value>Id of Locality</value>
-        public uint Id { get; set; }
+        public long Id { get; set; }
 
         ///<value>Name of locality</value> 
         public string Name { get; set; }
@@ -22,7 +22,7 @@ namespace TrainSchedule.Models
         /// </summary>
         /// <param name="id">Id of Locality to be created</param>
         /// <param name="name">Name of Locality to be created</param>
-        public Locality(uint id, string name)
+        public Locality(long id, string name)
         {
             Id = id;
             Name = name;
