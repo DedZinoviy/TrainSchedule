@@ -18,7 +18,7 @@ namespace TrainSchedule.Conections
         /// <returns>MySql connection</returns>
         public static MySqlConnection GetConnection()
         {
-            string connectionString = "Server=localhost;DataBase=trains;UId=root,Pwd=Hell.2002";
+            string connectionString = "Server=localhost;DataBase=trains;UId=root;Pwd=hell2002";
             return new MySqlConnection(connectionString);
         }
     }

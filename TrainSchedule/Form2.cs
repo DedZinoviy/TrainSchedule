@@ -32,7 +32,7 @@ namespace TrainSchedule
         private void Save_add_pass_btn_Click(object sender, EventArgs e)
         {
             // Получить данные из полей для ввода
-            string firstName = this.LastNamePassEdit.Text;
+            string firstName = this.FirstNamePassEdit.Text;
             string lastName = this.LastNamePassEdit.Text;
             string patronim = this.PatronimPassEdit.Text;
             string contact = this.ContactsPassEdit.Text;
@@ -46,7 +46,6 @@ namespace TrainSchedule
             // Добавить нового пассажира
             newPass = passRep.Append(newPass);
 
-            // Закрыть диалоговое окно
             this.Close();
 
         }
