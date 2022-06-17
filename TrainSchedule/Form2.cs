@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TrainSchedule.Models;
+using TrainSchedule.Repositories;
 
 namespace TrainSchedule
 {
@@ -39,6 +40,13 @@ namespace TrainSchedule
             // Создать временный объект для добавления в БД
             Passenger newPass = new Passenger(0, firstName, lastName, patronim, contact);
 
+            // Создать объект репозитория для работы с таблицей Passengers в MySql.
+            MySqlDbPassangerRepository passRep = new MySqlDbPassangerRepository();
+
+            // Добавить нового пассажира
+            newPass = passRep.Append(newPass);
+
+            // Закрыть диалоговое окно
             this.Close();
 
         }
