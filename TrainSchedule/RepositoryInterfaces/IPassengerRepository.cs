@@ -31,5 +31,11 @@ namespace TrainSchedule.RepositoryInterfaces
         /// </summary>
         /// <param name="passenger">Passenger object to delete.</param>
         public void Delete(Passenger passenger);
+
+        /// <summary>
+        /// Allows to get all passengers in database.
+        /// </summary>
+        /// <returns>Collection of passengers.</returns>
+        public IEnumerable<Passenger> GetAll();
     }
 }

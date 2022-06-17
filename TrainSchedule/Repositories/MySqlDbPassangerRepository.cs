@@ -53,5 +53,34 @@ namespace TrainSchedule.Repositories
         {
             return null;
         }
+
+        public IEnumerable<Passenger> GetAll()
+        {
+            List<Passenger> passengers = new List<Passenger>(); // Считать, что изначально в БД нет пассажиров.
+            string query = @"SELECT * FROM trains.passengers"; // Сформировать строку запроса на получение списка пассажиров.
+            using MySqlConnection connection = ConnectUtil.GetConnection(); // Создать соединение с БД.
+            connection.Open(); // Открыть соединение
+            try // Попытаться...
+            {
+                using MySqlCommand command = new MySqlCommand(query, connection); // Сформировать запрос на получение списка пассажиров.
+                using MySqlDataReader reader = command.ExecuteReader();  // Выплнить запрос
+                while(reader.Read()) // Пока имеются полученные объекты...
+                {
+                    long idPassenger = reader.GetInt32(0); // Получить данные о пассажирах.
+                    string firstName = reader.GetString(1);
+                    string lastName = reader.GetString(2);
+                    string patronim = reader.GetString(3);
+                    string contacts = reader.GetString(4);
+
+                    passengers.Add(new Passenger(idPassenger, firstName, lastName, patronim, contacts)); // Добавить сформированные объекты пассажиров в коллекцию.
+                }
+                return passengers; // Вернуть коллекцию.
+            }
+            catch (MySqlException ex) // Иначе...
+            {
+                throw new RepositoryException(ex.ErrorCode, ex.Message); // Вывести исключение.
+            }
+            
+        }
     }
 }
