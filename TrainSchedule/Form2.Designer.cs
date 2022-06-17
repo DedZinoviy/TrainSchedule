@@ -270,6 +270,7 @@
             this.MaximumSize = new System.Drawing.Size(1000, 1000);
             this.MinimumSize = new System.Drawing.Size(636, 244);
             this.Name = "Add_form";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Добавить...";
             this.Load += new System.EventHandler(this.Add_form_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
