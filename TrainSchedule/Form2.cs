@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TrainSchedule.Models;
 using TrainSchedule.Repositories;
+using TrainSchedule.Services;
 
 namespace TrainSchedule
 {
@@ -36,16 +37,13 @@ namespace TrainSchedule
             string lastName = this.LastNamePassEdit.Text;
             string patronim = this.PatronimPassEdit.Text;
             string contact = this.ContactsPassEdit.Text;
+            int error;
 
-            // Создать временный объект для добавления в БД
-            Passenger newPass = new Passenger(0, firstName, lastName, patronim, contact);
+            // Добавить в БД объект пользователя согласно данным из формы
+            DbPassengerServices services = new DbPassengerServices();
+            services.AppendNewPassenger(firstName, lastName, patronim, contact, out error);
 
-            // Создать объект репозитория для работы с таблицей Passengers в MySql.
-            MySqlDbPassangerRepository passRep = new MySqlDbPassangerRepository();
-
-            // Добавить нового пассажира
-            newPass = passRep.Append(newPass);
-
+            // Завершить добавление, закрыв форму.
             this.Close();
 
         }
