@@ -7,32 +7,29 @@ using TrainSchedule.Models;
 
 namespace TrainSchedule.RepositoryInterfaces
 {
-    public interface IPassengerRepository
+    /// <summary>
+    /// Interface for Passenger repositories.
+    /// </summary>
+    public interface IPassengerRepository : IRepository<Passenger>
     {
         /// <summary>
-        /// Interface for Locality repositories.
+        /// Allows to update passsenger object in database.
         /// </summary>
-        interface ILocalityRepository : IRepository<Passenger>
-        {
-            /// <summary>
-            /// Allows to update locality object in database.
-            /// </summary>
-            /// <param name="locality">Locality object to update.</param>
-            /// <returns>Updated locality object.</returns>
-            public Locality Update(Locality locality);
+        /// <param name="passenger">Passenger object to update.</param>
+        /// <returns>Updated passenger object.</returns>
+        public Passenger Update(Passenger passenger);
 
-            /// <summary>
-            /// Allows to append new locality object in database.
-            /// </summary>
-            /// <param name="newLocality">Locality object to append.</param>
-            /// <returns>Appended locality object</returns>
-            public Locality Append(Locality newLocality);
+        /// <summary>
+        /// Allows to append new passenger object in database.
+        /// </summary>
+        /// <param name="newPassenger">Passenger object to append.</param>
+        /// <returns>Appended Passenger object</returns>
+        public Passenger Append(Passenger newPassenger);
 
-            /// <summary>
-            /// Allows to delete locality object in database.
-            /// </summary>
-            /// <param name="locality">Locality object to delete.</param>
-            public void Delete(Locality locality);
-        }
+        /// <summary>
+        /// Allows to delete Passenger object in database.
+        /// </summary>
+        /// <param name="passenger">Passenger object to delete.</param>
+        public void Delete(Passenger passenger);
     }
 }
