@@ -14,40 +14,53 @@ namespace TrainSchedule
 
         public void AddPassanger(Passenger passenger)
         {
-            // Добавить строку с ФИО и контактами добавленного пассажира.
+            // Р”РѕР±Р°РІРёС‚СЊ СЃС‚СЂРѕРєСѓ СЃ Р¤РРћ Рё РєРѕРЅС‚Р°РєС‚Р°РјРё РґРѕР±Р°РІР»РµРЅРЅРѕРіРѕ РїР°СЃСЃР°Р¶РёСЂР°.
             this.passengers.Rows.Add(passenger.LastName, passenger.FirstName, passenger.Patronim, passenger.Contacts, passenger.Id);
 
-            // Отсортировать таблицу согласно фамилии.
+            // РћС‚СЃРѕСЂС‚РёСЂРѕРІР°С‚СЊ С‚Р°Р±Р»РёС†Сѓ СЃРѕРіР»Р°СЃРЅРѕ С„Р°РјРёР»РёРё.
             this.passengers.Sort(last_name, System.ComponentModel.ListSortDirection.Ascending);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // Создать репозиторий для работы с таблицей Passengers БД.
+            // РЎРѕР·РґР°С‚СЊ СЂРµРїРѕР·РёС‚РѕСЂРёР№ РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ С‚Р°Р±Р»РёС†РµР№ Passengers Р‘Р”.
             IPassengerRepository rep = new MySqlDbPassangerRepository();
 
-            // Получить список всех пассажиров.
+            // РџРѕР»СѓС‡РёС‚СЊ СЃРїРёСЃРѕРє РІСЃРµС… РїР°СЃСЃР°Р¶РёСЂРѕРІ.
             IEnumerable<Passenger> passes = rep.GetAll();
 
-            // Для каждого элемента коллекции...
+            // Р”Р»СЏ РєР°Р¶РґРѕРіРѕ СЌР»РµРјРµРЅС‚Р° РєРѕР»Р»РµРєС†РёРё...
             foreach (Passenger passenger in passes)
             {
-                // ...Добавить строку о пассажире в таблицу
+                // ...Р”РѕР±Р°РІРёС‚СЊ СЃС‚СЂРѕРєСѓ Рѕ РїР°СЃСЃР°Р¶РёСЂРµ РІ С‚Р°Р±Р»РёС†Сѓ
                 this.passengers.Rows.Add(passenger.LastName, passenger.FirstName, passenger.Patronim, passenger.Contacts, passenger.Id);
             }
 
-            this.passengers.Sort(last_name, System.ComponentModel.ListSortDirection.Ascending);  // Отсортировать таблицу.
+            this.passengers.Sort(last_name, System.ComponentModel.ListSortDirection.Ascending);  // РћС‚СЃРѕСЂС‚РёСЂРѕРІР°С‚СЊ С‚Р°Р±Р»РёС†Сѓ.
         }
 
         private void Delete_pass_Click(object sender, EventArgs e)
         {
+            if (this.passengers.CurrentRow != null)
+            {
+                int column = 4;
+                int selectedRowIndex = passengers.SelectedCells[0].RowIndex; // РџРѕР»СѓС‡РёС‚СЊ РёРЅРґРµРєСЃ СѓРґР»СЏРµРјРѕР№ Р·Р°РїРёСЃРё.
+                long id = Convert.ToInt32(passengers[column,selectedRowIndex].Value); // РџРѕР»СѓС‡РёС‚СЊ Р·РЅР°С‡РµРЅРёРµ, РїРѕ РєРѕС‚РѕСЂРѕРјСѓ РЅСѓР¶РЅРѕ СѓРґР°Р»РёС‚СЊ Р·Р°РїРёСЃСЊ РёР· Р‘Р”.
 
+                // РЈРґР°Р»РёС‚СЊ Р·Р°РїРёСЃСЊ РёР· Р‘Р”
+                DbPassengerServices service = new DbPassengerServices(); 
+                service.DeletePassenger(id);
+                
+                // РЈРґР°Р»РёС‚СЊ Р·Р°РїРёСЃСЊ РёР· С‚Р°Р±Р»РёС†С‹.
+                passengers.Rows.RemoveAt(selectedRowIndex);
+                passengers.Refresh();
+            }
         }
 
         private void Add_pass_Click(object sender, EventArgs e)
         {
-            Add_form form = new Add_form(this); // Создать форму для создания пассажира.
-            form.ShowDialog(this); // Запустить форму из главного родительского окна.
+            Add_form form = new Add_form(this); // РЎРѕР·РґР°С‚СЊ С„РѕСЂРјСѓ РґР»СЏ СЃРѕР·РґР°РЅРёСЏ РїР°СЃСЃР°Р¶РёСЂР°.
+            form.ShowDialog(this); // Р—Р°РїСѓСЃС‚РёС‚СЊ С„РѕСЂРјСѓ РёР· РіР»Р°РІРЅРѕРіРѕ СЂРѕРґРёС‚РµР»СЊСЃРєРѕРіРѕ РѕРєРЅР°.
         }
     }
 }
