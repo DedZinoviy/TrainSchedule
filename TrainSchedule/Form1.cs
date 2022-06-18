@@ -12,15 +12,31 @@ namespace TrainSchedule
             InitializeComponent();
         }
 
+        public void AddPassanger(Passenger passenger)
+        {
+            // Добавить строку с ФИО и контактами добавленного пассажира.
+            this.passengers.Rows.Add(passenger.LastName, passenger.FirstName, passenger.Patronim, passenger.Contacts, passenger.Id);
+
+            // Отсортировать таблицу согласно фамилии.
+            this.passengers.Sort(last_name, System.ComponentModel.ListSortDirection.Ascending);
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
+            // Создать репозиторий для работы с таблицей Passengers БД.
             IPassengerRepository rep = new MySqlDbPassangerRepository();
+
+            // Получить список всех пассажиров.
             IEnumerable<Passenger> passes = rep.GetAll();
+
+            // Для каждого элемента коллекции...
             foreach (Passenger passenger in passes)
             {
+                // ...Добавить строку о пассажире в таблицу
                 this.passengers.Rows.Add(passenger.LastName, passenger.FirstName, passenger.Patronim, passenger.Contacts, passenger.Id);
             }
-            this.passengers.Sort(last_name, System.ComponentModel.ListSortDirection.Ascending);
+
+            this.passengers.Sort(last_name, System.ComponentModel.ListSortDirection.Ascending);  // Отсортировать таблицу.
         }
 
         private void Delete_pass_Click(object sender, EventArgs e)
@@ -30,8 +46,8 @@ namespace TrainSchedule
 
         private void Add_pass_Click(object sender, EventArgs e)
         {
-            Add_form form = new Add_form();
-            form.ShowDialog();
+            Add_form form = new Add_form(this); // Создать форму для создания пассажира.
+            form.ShowDialog(this); // Запустить форму из главного родительского окна.
         }
     }
 }

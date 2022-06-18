@@ -8,16 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TrainSchedule.Models;
-using TrainSchedule.Repositories;
 using TrainSchedule.Services;
 
 namespace TrainSchedule
 {
     public partial class Add_form : Form
     {
-        public Add_form()
+        private TrainSchedule Schedule;
+
+        public Add_form(TrainSchedule schedule)
         {
             InitializeComponent();
+            Schedule = schedule;
         }
 
         private void Add_form_Load(object sender, EventArgs e)
@@ -41,7 +43,10 @@ namespace TrainSchedule
 
             // Добавить в БД объект пользователя согласно данным из формы
             DbPassengerServices services = new DbPassengerServices();
-            services.AppendNewPassenger(firstName, lastName, patronim, contact, out error);
+            Passenger passenger = services.AppendNewPassenger(firstName, lastName, patronim, contact, out error);
+           
+            // Вернуть объект родительскому окну.
+            Schedule.AddPassanger(passenger);
 
             // Завершить добавление, закрыв форму.
             this.Close();
