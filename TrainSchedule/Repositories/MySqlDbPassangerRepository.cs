@@ -46,7 +46,19 @@ namespace TrainSchedule.Repositories
 
         public void Delete(Passenger passenger)
         {
-            throw new NotImplementedException();
+            string query = @"DELETE FROM trains.passangers WHERE idpassangers = @id"; // Сформировать строку SQL-запроса на удаление пассажира из таблицы БД.
+            using MySqlConnection connection = ConnectUtil.GetConnection(); // Создать соединение с БД MySQL.
+            connection.Open(); // Открыть соединение.
+            try // Попытаться...
+            {
+                using MySqlCommand command = new MySqlCommand(query, connection); // Сформировать готовый запрос на удаление записи из таблицы Passengers.
+                command.Parameters.AddWithValue("@id", passenger.Id); // Присвоить значения переменной готовому SQL-запросы.
+                command.ExecuteNonQuery(); // Выполнить SQL-запрос.
+            }
+            catch (MySqlException exception) //Иначе...
+            {
+                throw new RepositoryException(exception.ErrorCode, exception.Message); // Сообщить об ошибке.
+            }
         }
 
         public Passenger GetById(long id)
@@ -57,7 +69,7 @@ namespace TrainSchedule.Repositories
         public IEnumerable<Passenger> GetAll()
         {
             List<Passenger> passengers = new List<Passenger>(); // Считать, что изначально в БД нет пассажиров.
-            string query = @"SELECT * FROM trains.passengers"; // Сформировать строку запроса на получение списка пассажиров.
+            string query = @"SELECT * FROM trains.passangers"; // Сформировать строку запроса на получение списка пассажиров.
             using MySqlConnection connection = ConnectUtil.GetConnection(); // Создать соединение с БД.
             connection.Open(); // Открыть соединение
             try // Попытаться...
