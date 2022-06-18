@@ -60,5 +60,30 @@ namespace TrainSchedule.Services
                 throw ex;
             }
         }
+
+        /// <summary>
+        /// Delete passenger from Passengers table.
+        /// </summary>
+        /// <param name="idPassenger">Passenge's id</param>
+        /// <returns>Success of operation</returns>
+        public int DeletePassenger(long idPassenger)
+        {
+            Passenger passenger = new Passenger(idPassenger, "", "", "", "");
+            // Попытаться...
+            try
+            {
+                // Удалить пассажира по id.
+                passRep.Delete(passenger);
+
+                // Вернуть результат операции.
+                return 0;
+            }
+            // Иначе...
+            catch (RepositoryException ex)
+            {
+                // Вернуть исключение.
+                throw ex;
+            }
+        }
     }
 }
