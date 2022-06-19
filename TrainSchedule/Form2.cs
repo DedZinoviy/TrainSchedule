@@ -41,15 +41,25 @@ namespace TrainSchedule
             string contact = this.ContactsPassEdit.Text;
             int error;
 
-            // Добавить в БД объект пользователя согласно данным из формы
-            DbPassengerServices services = new DbPassengerServices();
-            Passenger passenger = services.AppendNewPassenger(firstName, lastName, patronim, contact, out error);
-           
-            // Вернуть объект родительскому окну.
-            Schedule.AddPassanger(passenger);
+            if (String.IsNullOrEmpty(firstName) || String.IsNullOrEmpty(lastName) || String.IsNullOrEmpty(patronim) || String.IsNullOrEmpty(contact)) //  Если хотя бы одно текстовое поле пустое...
+            {
+                // Сообщить об ошибке ввода.
+                const string message = "Текстовые поля для ввода не должны быть пустыми.";
+                const string caption = "Ошибка ввода";
+                MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else // Иначе...
+            {
+                // Добавить в БД объект пользователя согласно данным из формы
+                DbPassengerServices services = new DbPassengerServices();
+                Passenger passenger = services.AppendNewPassenger(firstName, lastName, patronim, contact, out error);
 
-            // Завершить добавление, закрыв форму.
-            this.Close();
+                // Вернуть объект родительскому окну.
+                Schedule.AddPassanger(passenger);
+
+                // Завершить добавление, закрыв форму.
+                this.Close();
+            }
 
         }
     }
