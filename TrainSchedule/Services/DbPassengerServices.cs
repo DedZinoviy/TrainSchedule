@@ -85,5 +85,34 @@ namespace TrainSchedule.Services
                 throw ex;
             }
         }
+
+        /// <summary>
+        /// Updates passenger record in database.
+        /// </summary>
+        /// <param name="id">ID of updated passenger.</param>
+        /// <param name="lastName">Last name of updated passenger.</param>
+        /// <param name="firstName">First name of updated passenger.</param>
+        /// <param name="patronim">Patronim of updated passenger.</param>
+        /// <param name="contacts">Contacts of updated passenger.</param>
+        /// <returns>Updated passenger object.</returns>
+        public Passenger UpdatePassenger(long id, string lastName, string firstName, string patronim, string contacts)
+        {
+            Passenger passenger = new Passenger(id, lastName, firstName, patronim, contacts);
+            // Попытаться...
+            try
+            {
+                // Обновить данные в таблице БД о пассажире.
+                passenger = passRep.Update(passenger);
+
+                // Вернуть результат операции.
+                return passenger;
+            }
+            // Иначе...
+            catch(RepositoryException ex)
+            {
+                // Сообщить об ошибке.
+                throw ex;
+            }
+        }
     }
 }
