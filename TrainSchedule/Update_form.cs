@@ -37,16 +37,25 @@ namespace TrainSchedule
             string patronim = this.PatronimPassEdit.Text;
             string contact = this.ContactsPassEdit.Text;
             int error;
+            if (String.IsNullOrEmpty(firstName) || String.IsNullOrEmpty(lastName) || String.IsNullOrEmpty(patronim) || String.IsNullOrEmpty(contact)) //  Если хотя бы одно текстовое поле пустое...
+            {
+                // Сообщить об ошибке ввода.
+                const string message = "Текстовые поля для ввода не должны быть пустыми.";
+                const string caption = "Ошибка ввода";
+                MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else // Иначе...
+            {
+                // Добавить в БД объект пользователя согласно данным из формы
+                DbPassengerServices services = new DbPassengerServices();
+                Passenger passenger = services.UpdatePassenger(updateId, lastName, firstName, patronim, contact);
 
-            // Добавить в БД объект пользователя согласно данным из формы
-            DbPassengerServices services = new DbPassengerServices();
-            Passenger passenger = services.UpdatePassenger(updateId, lastName, firstName, patronim, contact);
+                // Вернуть объект родительскому окну.
+                Schedule.UpdatePassanger(passenger);
 
-            // Вернуть объект родительскому окну.
-            Schedule.UpdatePassanger(passenger);
-
-            // Завершить добавление, закрыв форму.
-            this.Close();
+                // Завершить добавление, закрыв форму.
+                this.Close();
+            }
         }
 
         private void Cancel_add_pass_btn_Click(object sender, EventArgs e)
