@@ -75,6 +75,7 @@
             this.Update_pass.TabIndex = 3;
             this.Update_pass.Text = "Редактировать";
             this.Update_pass.UseVisualStyleBackColor = true;
+            this.Update_pass.Click += new System.EventHandler(this.Update_pass_Click);
             // 
             // tableLayoutPanel1
             // 

@@ -21,6 +21,18 @@ namespace TrainSchedule
             this.passengers.Sort(last_name, System.ComponentModel.ListSortDirection.Ascending);
         }
 
+        public void UpdatePassanger(Passenger passenger)
+        {
+            int selectedRowIndex = passengers.SelectedCells[0].RowIndex; // Получить индекс обновляемой записи.                                                                       
+
+            // Удалить запись из таблицы.
+            passengers.Rows.RemoveAt(selectedRowIndex); 
+            passengers.Refresh();
+
+            // Добавить обновлённую запись в таблицу.
+            AddPassanger(passenger);
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             // Создать репозиторий для работы с таблицей Passengers БД.
@@ -76,6 +88,19 @@ namespace TrainSchedule
                 this.Update_pass.Enabled = false; // Запретить возможность удаления и редактирования записей.
                 this.Delete_pass.Enabled= false;
             }
+        }
+
+        private void Update_pass_Click(object sender, EventArgs e)
+        {
+            this.passengers.Enabled = false;
+            int column = 4;
+            int selectedRowIndex = passengers.SelectedCells[0].RowIndex; // Получить индекс обновляемой записи.
+            long id = Convert.ToInt32(passengers[column, selectedRowIndex].Value); // Получить значение, по которому нужно обновить запись в БД.
+
+            // Запустить форму из главного родительского окна.
+            Update_form form = new Update_form(this, id);
+            form.ShowDialog();
+            this.passengers.Enabled = true;
         }
     }
 }

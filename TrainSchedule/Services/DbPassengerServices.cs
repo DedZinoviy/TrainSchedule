@@ -97,7 +97,7 @@ namespace TrainSchedule.Services
         /// <returns>Updated passenger object.</returns>
         public Passenger UpdatePassenger(long id, string lastName, string firstName, string patronim, string contacts)
         {
-            Passenger passenger = new Passenger(id, lastName, firstName, patronim, contacts);
+            Passenger passenger = new Passenger(id, firstName, lastName, patronim, contacts);
             // Попытаться...
             try
             {
