@@ -62,5 +62,20 @@ namespace TrainSchedule
             Add_form form = new Add_form(this); // Создать форму для создания пассажира.
             form.ShowDialog(this); // Запустить форму из главного родительского окна.
         }
+
+        private void passengers_SelectionChanged(object sender, EventArgs e)
+        {
+            if (this.passengers.CurrentRow != null) // Если выбрана какая-либо строка в таблице пассажиров...
+            {
+                this.Update_pass.Enabled = true; // Сделать возможным редактирование и удаление записей
+                this.Delete_pass.Enabled = true;
+            }
+            
+            else // Иначе...
+            { 
+                this.Update_pass.Enabled = false; // Запретить возможность удаления и редактирования записей.
+                this.Delete_pass.Enabled= false;
+            }
+        }
     }
 }

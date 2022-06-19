@@ -47,10 +47,9 @@
             // Add_pass
             // 
             this.Add_pass.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Add_pass.Location = new System.Drawing.Point(3, 4);
-            this.Add_pass.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Add_pass.Location = new System.Drawing.Point(3, 3);
             this.Add_pass.Name = "Add_pass";
-            this.Add_pass.Size = new System.Drawing.Size(164, 38);
+            this.Add_pass.Size = new System.Drawing.Size(142, 29);
             this.Add_pass.TabIndex = 1;
             this.Add_pass.Text = "Добавить";
             this.Add_pass.UseVisualStyleBackColor = true;
@@ -59,10 +58,9 @@
             // Delete_pass
             // 
             this.Delete_pass.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Delete_pass.Location = new System.Drawing.Point(173, 4);
-            this.Delete_pass.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Delete_pass.Location = new System.Drawing.Point(151, 3);
             this.Delete_pass.Name = "Delete_pass";
-            this.Delete_pass.Size = new System.Drawing.Size(200, 38);
+            this.Delete_pass.Size = new System.Drawing.Size(173, 29);
             this.Delete_pass.TabIndex = 2;
             this.Delete_pass.Text = "Удалить";
             this.Delete_pass.UseVisualStyleBackColor = true;
@@ -71,10 +69,9 @@
             // Update_pass
             // 
             this.Update_pass.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Update_pass.Location = new System.Drawing.Point(379, 4);
-            this.Update_pass.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Update_pass.Location = new System.Drawing.Point(330, 3);
             this.Update_pass.Name = "Update_pass";
-            this.Update_pass.Size = new System.Drawing.Size(174, 38);
+            this.Update_pass.Size = new System.Drawing.Size(153, 29);
             this.Update_pass.TabIndex = 3;
             this.Update_pass.Text = "Редактировать";
             this.Update_pass.UseVisualStyleBackColor = true;
@@ -84,17 +81,16 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.15419F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.84581F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 179F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 158F));
             this.tableLayoutPanel1.Controls.Add(this.Add_pass, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.Update_pass, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.Delete_pass, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 274);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 205);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(556, 46);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(486, 35);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
             // passengers
@@ -109,15 +105,17 @@
             this.contacts,
             this.id});
             this.passengers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.passengers.Location = new System.Drawing.Point(3, 3);
+            this.passengers.Location = new System.Drawing.Point(3, 2);
+            this.passengers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.passengers.MultiSelect = false;
             this.passengers.Name = "passengers";
             this.passengers.RowHeadersVisible = false;
             this.passengers.RowHeadersWidth = 51;
             this.passengers.RowTemplate.Height = 29;
             this.passengers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.passengers.Size = new System.Drawing.Size(556, 264);
+            this.passengers.Size = new System.Drawing.Size(486, 198);
             this.passengers.TabIndex = 5;
+            this.passengers.SelectionChanged += new System.EventHandler(this.passengers_SelectionChanged);
             // 
             // last_name
             // 
@@ -161,21 +159,21 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.Controls.Add(this.passengers, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel1, 0, 1);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(180, 126);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(158, 94);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 83.33334F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(562, 324);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(492, 243);
             this.tableLayoutPanel2.TabIndex = 6;
             // 
             // TrainSchedule
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(914, 600);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tableLayoutPanel2);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "TrainSchedule";
             this.Text = "Train Schedule";
             this.Load += new System.EventHandler(this.Form1_Load);
