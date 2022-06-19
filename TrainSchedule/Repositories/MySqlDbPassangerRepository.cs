@@ -46,11 +46,40 @@ namespace TrainSchedule.Repositories
 
         public void Delete(Passenger passenger)
         {
-            string query = @"DELETE FROM trains.passangers WHERE idpassangers = @id"; // Сформировать строку SQL-запроса на удаление пассажира из таблицы БД.
-            using MySqlConnection connection = ConnectUtil.GetConnection(); // Создать соединение с БД MySQL.
-            connection.Open(); // Открыть соединение.
             try // Попытаться...
             {
+                string ticketSelect = @"SELECT idtickets FROM trains.tickets WHERE passenger_id = @id"; // Сформировать строку запроса на получение списка билетов, закреплённых за пассажром.
+                string query = @"DELETE FROM trains.passangers WHERE idpassangers = @id"; // Сформировать строку SQL-запроса на удаление пассажира из таблицы БД.
+                using MySqlConnection connection = ConnectUtil.GetConnection(); // Создать соединение с БД MySQL.
+                connection.Open(); // Открыть соединение.
+
+                using MySqlCommand ticketCommand = new MySqlCommand(ticketSelect, connection); // Сформировать готовый запрос на получение списка билетов, закреплённых за пасссажиром.
+                ticketCommand.Parameters.AddWithValue("@id", passenger.Id); // Присвоить значения переменной готовому SQL-запросы
+                using MySqlDataReader ticketReader = ticketCommand.ExecuteReader(); // Получить данные о билетах.
+                List<long> ids = new List<long>(); // Считать, что изначально у пассажира нет билетов.
+                while (ticketReader.Read()) // Пока имеются возвращённые из запроса билеты...
+                {
+                    long id = ticketReader.GetInt32(0); // Узнать id билетаю
+                    ids.Add(id); // Добавить билет к пассажиру.
+                }
+                string deleteTTS = "DELETE FROM trains.tickets_to_servcies WHERE ticket_id = @id"; // Сформировать строку запроса на удаление услуг, закреплённых за билетами.
+                connection.Close(); // Обновить соединение.
+                connection.Open();
+                foreach (long id in ids) // Для каждого билета, закреплённого за пассажиром...
+                {
+                    using MySqlCommand ttsCommand = new MySqlCommand(deleteTTS, connection); // Сформировать готовый запрос на удаление прикреплённых услуг.
+                    ttsCommand.Parameters.AddWithValue("@id", id); // Присвоить значения переменной готовому SQL-запросу
+                    ttsCommand.ExecuteNonQuery(); // Выполнить запрос.
+                }
+                connection.Close(); // Обновить соединение;
+                connection.Open();
+                string deleteTickets = "DELETE FROM trains.tickets WHERE idtickets = @id"; // Сформировать строку запроса на удаление билетов, закреплённых за пассажиром.
+                foreach (long id in ids) // Для каждого билета, закреплённого за пассажиром...
+                {
+                    using MySqlCommand ticketDeleteCommand = new MySqlCommand(deleteTickets, connection); // Сформировать готовый запрос на удаление билета.
+                    ticketDeleteCommand.Parameters.AddWithValue("@id", id); // Присвоить значения переменной готовому SQL-запросу.
+                    ticketDeleteCommand.ExecuteNonQuery(); // Выполнить запрос.
+                }
                 using MySqlCommand command = new MySqlCommand(query, connection); // Сформировать готовый запрос на удаление записи из таблицы Passengers.
                 command.Parameters.AddWithValue("@id", passenger.Id); // Присвоить значения переменной готовому SQL-запросы.
                 command.ExecuteNonQuery(); // Выполнить SQL-запрос.
