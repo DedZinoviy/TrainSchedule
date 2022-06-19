@@ -14,7 +14,26 @@ namespace TrainSchedule.Repositories
     {
         public Passenger Update(Passenger passenger)
         {
-            throw new NotImplementedException();
+            string sql = @"UPDATE trains.passangers SET first_name = @f_name, last_name = @l_name, patronim = @ptr, contacts = @ctc WHERE idpassangers = @id"; // Сформировать строку SQL-запроса на обновление данных в таблице.
+            using MySqlConnection connection = ConnectUtil.GetConnection(); // Создать соединение с БД MySql
+            connection.Open(); // Открыть соединение.
+            try // Попытаться...
+            {
+                using MySqlCommand command = new MySqlCommand(sql, connection); // Сформировать готовый SQL-запрос на обновление записи в таблице passangers.
+                command.Parameters.AddWithValue("@f_name", passenger.FirstName); // Присвоить значения параметров SQL-запросу.
+                command.Parameters.AddWithValue("@l_name", passenger.LastName);
+                command.Parameters.AddWithValue("@ptr", passenger.Patronim);
+                command.Parameters.AddWithValue("@ctc", passenger.Contacts);
+                command.Parameters.AddWithValue("@id", passenger.Id);
+
+                command.ExecuteNonQuery(); // Выполнить  запрос.
+
+                return passenger; // Вернуть объект обновлённого пользователя.
+            }
+            catch (MySqlException exception) // Иначе...
+            {
+                throw new RepositoryException(exception.ErrorCode, exception.Message); // Сообщить об ошибке.
+            }
         }
 
         public Passenger Append(Passenger newPassenger)
@@ -27,7 +46,7 @@ namespace TrainSchedule.Repositories
 
             try // Попытаться...
             {
-                using MySqlCommand command = new MySqlCommand(sql, connection); // Сформировать готовый SQL-запрос на добавление в таблицу localities
+                using MySqlCommand command = new MySqlCommand(sql, connection); // Сформировать готовый SQL-запрос на добавление в таблице passangers.
                 command.Parameters.AddWithValue("@f_name", newPassenger.FirstName); // Присвоить значения параметров SQL-запросу
                 command.Parameters.AddWithValue("@l_name", newPassenger.LastName);
                 command.Parameters.AddWithValue("@ptr", newPassenger.Patronim);
