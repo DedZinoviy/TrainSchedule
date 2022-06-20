@@ -44,7 +44,7 @@ namespace TrainSchedule.Repositories
         public Ticket Update(Ticket ticket)
         {
             string sql = "UPDATE trains.passangers SET ticket_availability = @av, ticket_cost = @cost, passenger_id = @pas, review_id = @review, seat_id = @seat, route_id = @route WHERE idpassangers = @id"; // Сформировать строку запроса на обновление в таблице tickets.
-            
+
             using MySqlConnection connection = ConnectUtil.GetConnection(); // Создать соединение с БД MySql
 
             connection.Open(); // Открыть соединение
@@ -125,7 +125,34 @@ namespace TrainSchedule.Repositories
 
         public IEnumerable<Ticket> GetByPassenger(Passenger passenger)
         {
-            throw new NotImplementedException();
+            List<Ticket> tickets = new List<Ticket>(); // Считать, что изначально в БД нет билетов у пассажира.
+            string query = @"SELECT * FROM trains.tickets WHERE passenger_id = @id";
+            using MySqlConnection connection = ConnectUtil.GetConnection(); // Создать соединение с БД.
+            connection.Open(); // Открыть соединение
+            try // Попытаться...
+            {
+                using MySqlCommand command = new MySqlCommand(query, connection); // Сформировать запрос на получение списка билетов.
+                command.Parameters.AddWithValue("@id", passenger.Id); // Присвоить значение переменной запросу.
+                using MySqlDataReader reader = command.ExecuteReader();  // Выплнить запрос
+                while (reader.Read()) // Пока имеются полученные объекты...
+                {
+                    long idTicket = reader.GetInt32(0); // Получить данные о билетах.
+                    int availability = reader.GetInt32(1);
+                    double cost = reader.GetDouble(2);
+                    long review_id = reader.GetInt32(3);
+                    long passenger_id = reader.GetInt32(4);
+                    long seat_id = reader.GetInt32(5);
+                    long route_id = reader.GetInt32(6);
+
+                    tickets.Add(new Ticket(idTicket, availability, cost, review_id, passenger_id, seat_id, route_id)); // Добавить сформированные объекты билетов в коллекцию.
+                }
+                return tickets; // Вернуть коллекцию.
+            }
+            catch (MySqlException ex) // Иначе...
+            {
+                throw new RepositoryException(ex.ErrorCode, ex.Message); // Вывести исключение.
+            }
+
         }
 
         public IEnumerable<Ticket> GetByTrainNumber(long trainNumber)
