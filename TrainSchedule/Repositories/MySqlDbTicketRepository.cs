@@ -43,7 +43,29 @@ namespace TrainSchedule.Repositories
 
         public Ticket Update(Ticket ticket)
         {
-            throw new NotImplementedException();
+            string sql = "UPDATE trains.passangers SET ticket_availability = @av, ticket_cost = @cost, passenger_id = @pas, review_id = @review, seat_id = @seat, route_id = @route WHERE idpassangers = @id"; // Сформировать строку запроса на обновление в таблице tickets.
+            
+            using MySqlConnection connection = ConnectUtil.GetConnection(); // Создать соединение с БД MySql
+
+            connection.Open(); // Открыть соединение
+
+            try // Попытаться...
+            {
+                using MySqlCommand command = new MySqlCommand(sql, connection); // Сформировать готовый SQL-запрос на обновление записи в таблице tickets.
+                command.Parameters.AddWithValue("@av", ticket.Availability); // Присвоить значения параметров SQL-запросу
+                command.Parameters.AddWithValue("@cost", ticket.Cost);
+                command.Parameters.AddWithValue("@pas", ticket.Passenger_id);
+                command.Parameters.AddWithValue("@review", ticket.Review_id);
+                command.Parameters.AddWithValue("@seat", ticket.Seat_id);
+                command.Parameters.AddWithValue("@route", ticket.Route_id);
+
+                command.ExecuteNonQuery(); // Выполнить SQL-запрос.
+                return ticket; // Вернуть обновлённый объект.
+            }
+            catch (MySqlException exception) // Иначе...
+            {
+                throw new RepositoryException(exception.ErrorCode, exception.Message); // Сообщить об ошибке.
+            }
         }
 
         public void Delete(Ticket ticket)
