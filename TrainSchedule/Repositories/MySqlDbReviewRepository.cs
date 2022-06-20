@@ -81,7 +81,28 @@ namespace TrainSchedule.Repositories
 
         public float GetAverageEvaluationByTrain(Train train)
         {
-            throw new NotImplementedException();
+            string sql = @"SELECT AVG(rv.evaluation) FROM trains.reviews AS rv
+                            RIGHT JOIN trains.tickets AS tct ON rv.idreviews = tct.review_id
+                            RIGHT JOIN trains.routes AS r ON r.id_routes = tct.route_id
+                            JOIN trains.trains AS t ON t.idtrains = r.train_id
+                            WHERE t.number_of_train = @number"; // Сформировать запрос на получение средней пассажирской оценки.
+            MySqlConnection connection = ConnectUtil.GetConnection(); // Создать соедение с БД MySql.
+            connection.Open();//Открыть соединение.
+            try // Попытаться...
+            {
+                MySqlCommand cmd = new MySqlCommand(sql,connection); // Сформирвоать готовый запрос.
+                cmd.Parameters.AddWithValue("@number", train.TrainNumber); //Присвоить значения параметрам.
+                using MySqlDataReader reader = cmd.ExecuteReader(); // Выполнить запрос.
+                if(reader.Read()) // Вернуть среднюю оценку, если таковая получена.
+                {
+                    return reader.GetFloat(0);
+                }
+                return 0;
+            }
+            catch (MySqlException exception) //Иначе...
+            {
+                throw new RepositoryException(exception.ErrorCode, exception.Message); // сообщить об ошибке.
+            }
         }
     }
 }
