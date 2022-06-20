@@ -112,6 +112,7 @@
             this.wagons.RowTemplate.Height = 25;
             this.wagons.Size = new System.Drawing.Size(111, 150);
             this.wagons.TabIndex = 3;
+            this.wagons.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.wagons_CellClick);
             // 
             // wagonNumber
             // 

@@ -42,16 +42,34 @@ namespace TrainSchedule
 
         private void trains_SelectionChanged(object sender, EventArgs e)
         {
-            this.wagons.Rows.Clear(); // Очистить таблицу
-            int selectedRowIndex = trains.SelectedCells[0].RowIndex; // Получить индекс удляемой записи.
-            long id = Convert.ToInt32(trains[1, selectedRowIndex].Value); // Получить значение, по которому нужно удалить запись из БД.
+            int selectedRowIndex = trains.SelectedCells[0].RowIndex; // Получить индекс текущей записи.
+            long id = Convert.ToInt32(trains[1, selectedRowIndex].Value); // Получить значение, по которому нужно найти запись из БД.
             MySqlDbWagonRepository repository = new MySqlDbWagonRepository(); // Создать репозиторий для работы с Wagons.
             IEnumerable<Wagon> wagons = repository.GetByTrain(new Train(id, " ", 0, false)); //Получить список вагонов для поезда.
+            this.wagons.Rows.Clear(); // Очистить таблицу вагонов.
+            this.places.Rows.Clear(); // Очистить таблицу билетов.
             foreach (Wagon wagon in wagons) // Для каждого элемента коллекции...
             {
                 this.wagons.Rows.Add(wagon.Number, wagon.Id); // Добавить элемент в таблицу.
             }
+
             this.wagons.Sort(wagonNumber, System.ComponentModel.ListSortDirection.Ascending); // Упорядочить таблицу.
+            this.wagons.ClearSelection(); // Очистить выбор.
+        }
+
+        private void wagons_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int selectedRowIndex = wagons.SelectedCells[0].RowIndex; // Получить индекс текущей записи.
+            long id = Convert.ToInt32(wagons[1, selectedRowIndex].Value); // Получить значение, по которому нужно найти запись из БД.
+            MySqlDbSeatRepository repository = new MySqlDbSeatRepository(); // Создать репозиторий для работы с Places.
+            IEnumerable<Seat> seats = repository.GetFreeSeatByWagon(new Wagon(id, 0, 0)); //Получить список свободных мест в поезде.
+            this.places.Rows.Clear(); // Очистить таблицу.
+            foreach (Seat seat in seats) //  Для каждого элемента коллекции...
+            {
+                this.places.Rows.Add(seat.Number, seat.Id); // Добавить элемент в таблицу.
+            }
+            this.places.Sort(placeNumber, System.ComponentModel.ListSortDirection.Ascending); // Упорядочить таблицу.
+
         }
     }
 }
