@@ -21,6 +21,37 @@ namespace TrainSchedule
             this.passengers.Sort(last_name, System.ComponentModel.ListSortDirection.Ascending);
         }
 
+        public void AddTicket()
+        {
+            this.tickets.Rows.Clear(); // Очистить таблицу билетов.
+
+            int selectedRowIndex = passengers.SelectedCells[0].RowIndex; // Получить индекс просматриваемой записи.
+            long id = Convert.ToInt32(passengers[4, selectedRowIndex].Value); // Получить значение, по которому вывести список билетов из БД.
+
+            // Получить список билетов и информацию о них для конкретного пользователя.
+            DbTicketServices serv = new DbTicketServices();
+            IEnumerable<Train> trainsList = null;
+            IEnumerable<Locality> localityList = null;
+            IEnumerable<DateTime> arrTimes = null;
+            IEnumerable<DateTime> depTimes = null;
+            IEnumerable<Ticket> ticketList = serv.GetInfoAboutTicketsByPassenger(new Passenger(id, "", "", "", ""), out trainsList, out localityList, out arrTimes, out depTimes);
+
+            // Добавить записи о билетах в таблицу.
+            int i = 0;
+            foreach (Ticket ticket in ticketList)
+            {
+                this.tickets.Rows.Add(trainsList.ToArray()[i].TrainNumber, localityList.ToArray()[i].Name, depTimes.ToArray()[i], arrTimes.ToArray()[i], ticket.Id);
+            }
+        }
+
+        public long GetPassengerId()
+        {
+            int column = 4;
+            int selectedRowIndex = passengers.SelectedCells[0].RowIndex; // Получить индекс текцщей записи.
+            long id = Convert.ToInt32(passengers[column, selectedRowIndex].Value); // Получить значение.
+            return id;
+        }
+
         public void UpdatePassanger(Passenger passenger)
         {
             int selectedRowIndex = passengers.SelectedCells[0].RowIndex; // Получить индекс обновляемой записи.                                                                       
@@ -126,7 +157,7 @@ namespace TrainSchedule
 
         private void Add_ticket_btn_Click(object sender, EventArgs e)
         {
-            Add_ticket form = new Add_ticket();
+            Add_ticket form = new Add_ticket(this);
             form.ShowDialog(this);
         }
     }
