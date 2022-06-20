@@ -39,9 +39,18 @@
             this.contacts = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.tickets = new System.Windows.Forms.DataGridView();
+            this.trainNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.departure = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.timeOfDeparture = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.timeOfArrival = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ticketId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.deleteTicketBtn = new System.Windows.Forms.Button();
+            this.Add_ticket_btn = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.passengers)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tickets)).BeginInit();
             this.SuspendLayout();
             // 
             // Add_pass
@@ -106,6 +115,7 @@
             this.contacts,
             this.id});
             this.passengers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.passengers.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.passengers.Location = new System.Drawing.Point(3, 2);
             this.passengers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.passengers.MultiSelect = false;
@@ -160,7 +170,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.Controls.Add(this.passengers, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel1, 0, 1);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(158, 94);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(12, 11);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
@@ -169,11 +179,88 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(492, 243);
             this.tableLayoutPanel2.TabIndex = 6;
             // 
+            // tickets
+            // 
+            this.tickets.AllowUserToAddRows = false;
+            this.tickets.AllowUserToDeleteRows = false;
+            this.tickets.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tickets.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.trainNumber,
+            this.departure,
+            this.timeOfDeparture,
+            this.timeOfArrival,
+            this.ticketId});
+            this.tickets.Location = new System.Drawing.Point(510, 13);
+            this.tickets.Name = "tickets";
+            this.tickets.ReadOnly = true;
+            this.tickets.RowHeadersVisible = false;
+            this.tickets.RowTemplate.Height = 25;
+            this.tickets.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.tickets.Size = new System.Drawing.Size(543, 198);
+            this.tickets.TabIndex = 7;
+            // 
+            // trainNumber
+            // 
+            this.trainNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.trainNumber.HeaderText = "Номер поезда";
+            this.trainNumber.Name = "trainNumber";
+            this.trainNumber.ReadOnly = true;
+            // 
+            // departure
+            // 
+            this.departure.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.departure.HeaderText = "Населённый пункт";
+            this.departure.Name = "departure";
+            this.departure.ReadOnly = true;
+            // 
+            // timeOfDeparture
+            // 
+            this.timeOfDeparture.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.timeOfDeparture.HeaderText = "Время отправления";
+            this.timeOfDeparture.Name = "timeOfDeparture";
+            this.timeOfDeparture.ReadOnly = true;
+            // 
+            // timeOfArrival
+            // 
+            this.timeOfArrival.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.timeOfArrival.HeaderText = "Время прибытия";
+            this.timeOfArrival.Name = "timeOfArrival";
+            this.timeOfArrival.ReadOnly = true;
+            // 
+            // ticketId
+            // 
+            this.ticketId.HeaderText = "";
+            this.ticketId.Name = "ticketId";
+            this.ticketId.ReadOnly = true;
+            this.ticketId.Visible = false;
+            // 
+            // deleteTicketBtn
+            // 
+            this.deleteTicketBtn.Location = new System.Drawing.Point(741, 225);
+            this.deleteTicketBtn.Name = "deleteTicketBtn";
+            this.deleteTicketBtn.Size = new System.Drawing.Size(75, 23);
+            this.deleteTicketBtn.TabIndex = 8;
+            this.deleteTicketBtn.Text = "Удалить";
+            this.deleteTicketBtn.UseVisualStyleBackColor = true;
+            // 
+            // Add_ticket_btn
+            // 
+            this.Add_ticket_btn.Location = new System.Drawing.Point(606, 225);
+            this.Add_ticket_btn.Name = "Add_ticket_btn";
+            this.Add_ticket_btn.Size = new System.Drawing.Size(75, 23);
+            this.Add_ticket_btn.TabIndex = 9;
+            this.Add_ticket_btn.Text = "Добавить";
+            this.Add_ticket_btn.UseVisualStyleBackColor = true;
+            this.Add_ticket_btn.Click += new System.EventHandler(this.Add_ticket_btn_Click);
+            // 
             // TrainSchedule
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1091, 470);
+            this.Controls.Add(this.Add_ticket_btn);
+            this.Controls.Add(this.deleteTicketBtn);
+            this.Controls.Add(this.tickets);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Name = "TrainSchedule";
             this.Text = "Train Schedule";
@@ -181,6 +268,7 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.passengers)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tickets)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -197,5 +285,13 @@
         private DataGridViewTextBoxColumn patronim;
         private DataGridViewTextBoxColumn contacts;
         private DataGridViewTextBoxColumn id;
+        private DataGridView tickets;
+        private DataGridViewTextBoxColumn trainNumber;
+        private DataGridViewTextBoxColumn departure;
+        private DataGridViewTextBoxColumn timeOfDeparture;
+        private DataGridViewTextBoxColumn timeOfArrival;
+        private DataGridViewTextBoxColumn ticketId;
+        private Button deleteTicketBtn;
+        private Button Add_ticket_btn;
     }
 }

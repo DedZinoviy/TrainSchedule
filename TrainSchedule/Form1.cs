@@ -81,12 +81,33 @@ namespace TrainSchedule
             {
                 this.Update_pass.Enabled = true; // Сделать возможным редактирование и удаление записей
                 this.Delete_pass.Enabled = true;
+
+                this.tickets.Rows.Clear(); // Очистить таблицу билетов.
+
+                int selectedRowIndex = passengers.SelectedCells[0].RowIndex; // Получить индекс просматриваемой записи.
+                long id = Convert.ToInt32(passengers[4, selectedRowIndex].Value); // Получить значение, по которому вывести список билетов из БД.
+
+                // Получить список билетов и информацию о них для конкретного пользователя.
+                DbTicketServices serv = new DbTicketServices(); 
+                IEnumerable<Train> trainsList = null;
+                IEnumerable<Locality> localityList = null;
+                IEnumerable<DateTime> arrTimes = null;
+                IEnumerable<DateTime> depTimes = null;
+                IEnumerable<Ticket> ticketList = serv.GetInfoAboutTicketsByPassenger(new Passenger(id, "","", "", ""),out trainsList, out localityList, out arrTimes, out depTimes);
+
+                // Добавить записи о билетах в таблицу.
+                int i = 0;
+                foreach (Ticket ticket in ticketList)
+                {
+                    this.tickets.Rows.Add(trainsList.ToArray()[i].TrainNumber, localityList.ToArray()[i].Name, depTimes.ToArray()[i], arrTimes.ToArray()[i], ticket.Id);
+                }
             }
             
             else // Иначе...
             { 
                 this.Update_pass.Enabled = false; // Запретить возможность удаления и редактирования записей.
                 this.Delete_pass.Enabled= false;
+                this.tickets.Rows.Clear(); // Очистить таблицу информации о билетах.
             }
         }
 
@@ -101,6 +122,12 @@ namespace TrainSchedule
             Update_form form = new Update_form(this, id);
             form.ShowDialog();
             this.passengers.Enabled = true;
+        }
+
+        private void Add_ticket_btn_Click(object sender, EventArgs e)
+        {
+            Add_ticket form = new Add_ticket();
+            form.ShowDialog(this);
         }
     }
 }
