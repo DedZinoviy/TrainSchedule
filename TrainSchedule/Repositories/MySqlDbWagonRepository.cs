@@ -10,7 +10,7 @@ using TrainSchedule.RepositoryInterfaces;
 
 namespace TrainSchedule.Repositories
 {
-    public class MySqlWagonRepository : IWagonRepository
+    public class MySqlDbWagonRepository : IWagonRepository
     {
         public IEnumerable<Wagon> GetByTrain(Train train)
         {
