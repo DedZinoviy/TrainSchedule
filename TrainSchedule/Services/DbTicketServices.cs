@@ -145,5 +145,30 @@ namespace TrainSchedule.Services
                 throw ex; // Сообщить об ошибке.
             }
         }
+
+        /// <summary>
+        /// Allows to delete tickets from database.
+        /// </summary>
+        /// <param name="idTicket">Id of Ticket to be deleted.</param>
+        /// <returns></returns>
+        public int DeleteTicket(long idTicket)
+        {
+            Ticket ticket = new Ticket(idTicket, 0, 0, 0, 0, 0, 0);
+            // Попытаться...
+            try
+            {
+                // Удалить Билет по id.
+                ticketRepository.Delete(ticket);
+
+                // Вернуть результат операции.
+                return 0;
+            }
+            // Иначе...
+            catch (RepositoryException ex)
+            {
+                // Вернуть исключение.
+                throw ex;
+            }
+        }
     }
 }
