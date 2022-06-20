@@ -81,6 +81,7 @@
             this.trains.RowTemplate.Height = 25;
             this.trains.Size = new System.Drawing.Size(152, 150);
             this.trains.TabIndex = 2;
+            this.trains.SelectionChanged += new System.EventHandler(this.trains_SelectionChanged);
             // 
             // trainNumber
             // 
