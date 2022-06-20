@@ -9,13 +9,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TrainSchedule.Repositories;
 using TrainSchedule.Models;
+using TrainSchedule.Services;
 
 namespace TrainSchedule
 {
     public partial class Add_ticket : Form
     {
-        public Add_ticket()
+        private TrainSchedule Schedule;
+        public Add_ticket(TrainSchedule schedule)
         {
+            Schedule = schedule;
             InitializeComponent();
         }
 
@@ -32,7 +35,15 @@ namespace TrainSchedule
 
         private void Save_btn_Click(object sender, EventArgs e)
         {
-            this.Close();
+            long pasId = Schedule.GetPassengerId(); // Узнать, какой пассажир приоборетает билет.
+            DbTicketServices serv =new DbTicketServices(); // Создать объект службы для работы с билетами.
+            long trainId = Convert.ToInt32(this.trains[1,this.trains.CurrentRow.Index].Value); // Узнать на какой поезд покупается билет.
+            long seatId = Convert.ToInt32(this.places[1, this.places.CurrentRow.Index].Value); // Узнать на какое место покупается билет.
+            int avail = 0;
+            float cost = (float)this.cost.Value; // Узнать стоимость билета.
+            serv.AppendNewTicket(trainId,seatId,pasId,cost,avail); // Добавить сущность билета в БД.
+            Schedule.AddTicket();
+            this.Close(); // Закрыть окно.
         }
 
         private void Cancel_btn_Click(object sender, EventArgs e)
