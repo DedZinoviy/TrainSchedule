@@ -204,6 +204,7 @@
             this.Controls.Add(this.Cancel_btn);
             this.Controls.Add(this.Save_btn);
             this.Name = "Add_ticket";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Добавить билет...";
             this.Load += new System.EventHandler(this.Add_ticket_Load);
             ((System.ComponentModel.ISupportInitialize)(this.trains)).EndInit();

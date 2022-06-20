@@ -47,10 +47,15 @@
             this.ticketId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.deleteTicketBtn = new System.Windows.Forms.Button();
             this.Add_ticket_btn = new System.Windows.Forms.Button();
+            this.updateTicketBtn = new System.Windows.Forms.Button();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.passengers)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tickets)).BeginInit();
+            this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // Add_pass
@@ -190,13 +195,14 @@
             this.timeOfDeparture,
             this.timeOfArrival,
             this.ticketId});
-            this.tickets.Location = new System.Drawing.Point(510, 13);
+            this.tickets.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tickets.Location = new System.Drawing.Point(3, 3);
             this.tickets.Name = "tickets";
             this.tickets.ReadOnly = true;
             this.tickets.RowHeadersVisible = false;
             this.tickets.RowTemplate.Height = 25;
             this.tickets.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.tickets.Size = new System.Drawing.Size(543, 198);
+            this.tickets.Size = new System.Drawing.Size(478, 196);
             this.tickets.TabIndex = 7;
             this.tickets.SelectionChanged += new System.EventHandler(this.tickets_SelectionChanged);
             // 
@@ -237,9 +243,10 @@
             // 
             // deleteTicketBtn
             // 
-            this.deleteTicketBtn.Location = new System.Drawing.Point(741, 225);
+            this.deleteTicketBtn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.deleteTicketBtn.Location = new System.Drawing.Point(147, 3);
             this.deleteTicketBtn.Name = "deleteTicketBtn";
-            this.deleteTicketBtn.Size = new System.Drawing.Size(75, 23);
+            this.deleteTicketBtn.Size = new System.Drawing.Size(166, 29);
             this.deleteTicketBtn.TabIndex = 8;
             this.deleteTicketBtn.Text = "Удалить";
             this.deleteTicketBtn.UseVisualStyleBackColor = true;
@@ -247,22 +254,63 @@
             // 
             // Add_ticket_btn
             // 
-            this.Add_ticket_btn.Location = new System.Drawing.Point(606, 225);
+            this.Add_ticket_btn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Add_ticket_btn.Location = new System.Drawing.Point(3, 3);
             this.Add_ticket_btn.Name = "Add_ticket_btn";
-            this.Add_ticket_btn.Size = new System.Drawing.Size(75, 23);
+            this.Add_ticket_btn.Size = new System.Drawing.Size(138, 29);
             this.Add_ticket_btn.TabIndex = 9;
             this.Add_ticket_btn.Text = "Добавить";
             this.Add_ticket_btn.UseVisualStyleBackColor = true;
             this.Add_ticket_btn.Click += new System.EventHandler(this.Add_ticket_btn_Click);
+            // 
+            // updateTicketBtn
+            // 
+            this.updateTicketBtn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.updateTicketBtn.Location = new System.Drawing.Point(319, 3);
+            this.updateTicketBtn.Name = "updateTicketBtn";
+            this.updateTicketBtn.Size = new System.Drawing.Size(156, 29);
+            this.updateTicketBtn.TabIndex = 10;
+            this.updateTicketBtn.Text = "Редактировать";
+            this.updateTicketBtn.UseVisualStyleBackColor = true;
+            this.updateTicketBtn.Click += new System.EventHandler(this.updateTicketBtn_Click);
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 3;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.56962F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.43038F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 161F));
+            this.tableLayoutPanel3.Controls.Add(this.Add_ticket_btn, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.updateTicketBtn, 2, 0);
+            this.tableLayoutPanel3.Controls.Add(this.deleteTicketBtn, 1, 0);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 205);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 1;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(478, 35);
+            this.tableLayoutPanel3.TabIndex = 11;
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 1;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.Controls.Add(this.tickets, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel3, 0, 1);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(510, 11);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 2;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 83.12757F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.87243F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(484, 243);
+            this.tableLayoutPanel4.TabIndex = 12;
             // 
             // TrainSchedule
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1091, 470);
-            this.Controls.Add(this.Add_ticket_btn);
-            this.Controls.Add(this.deleteTicketBtn);
-            this.Controls.Add(this.tickets);
+            this.Controls.Add(this.tableLayoutPanel4);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Name = "TrainSchedule";
             this.Text = "Train Schedule";
@@ -271,6 +319,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.passengers)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tickets)).EndInit();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -295,5 +345,8 @@
         private DataGridViewTextBoxColumn ticketId;
         private Button deleteTicketBtn;
         private Button Add_ticket_btn;
+        private Button updateTicketBtn;
+        private TableLayoutPanel tableLayoutPanel3;
+        private TableLayoutPanel tableLayoutPanel4;
     }
 }
