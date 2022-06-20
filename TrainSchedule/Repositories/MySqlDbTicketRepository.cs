@@ -43,7 +43,7 @@ namespace TrainSchedule.Repositories
 
         public Ticket Update(Ticket ticket)
         {
-            string sql = "UPDATE trains.passangers SET ticket_availability = @av, ticket_cost = @cost, passenger_id = @pas, review_id = @review, seat_id = @seat, route_id = @route WHERE idpassangers = @id"; // Сформировать строку запроса на обновление в таблице tickets.
+            string sql = "UPDATE trains.tickets SET ticket_availability = @av, ticket_cost = @cost, passenger_id = @pas, review_id = @review, seat_id = @seat, route_id = @route WHERE idtickets = @id"; // Сформировать строку запроса на обновление в таблице tickets.
 
             using MySqlConnection connection = ConnectUtil.GetConnection(); // Создать соединение с БД MySql
 
@@ -58,6 +58,7 @@ namespace TrainSchedule.Repositories
                 command.Parameters.AddWithValue("@review", ticket.Review_id);
                 command.Parameters.AddWithValue("@seat", ticket.Seat_id);
                 command.Parameters.AddWithValue("@route", ticket.Route_id);
+                command.Parameters.AddWithValue("@id", ticket.Id);
 
                 command.ExecuteNonQuery(); // Выполнить SQL-запрос.
                 return ticket; // Вернуть обновлённый объект.

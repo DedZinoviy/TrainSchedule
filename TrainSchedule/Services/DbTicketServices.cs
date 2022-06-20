@@ -179,8 +179,8 @@ namespace TrainSchedule.Services
             conn.Open(); // Открыть соединение с БД.
             try // Попытаться...
             {
-                MySqlDbReviewRepository rep = new MySqlDbReviewRepository();
-                Review rev = rep.GetByTicket(new Ticket(ticketId, 0, 0, 0, 0, 0, 0));
+                var rev = new MySqlDbReviewRepository();
+                Review review = rev.Append(new Review(0, null, null, 0)); // Добавить пустой отзыв в таблицу reviews.
                 MySqlCommand cmd = new MySqlCommand(sql, conn); // Сформировать готовый запрос на получение id маршрута.
                 cmd.Parameters.AddWithValue("@id", trainId); // Присвоить значения параметров запросу.
                 using MySqlDataReader reader = cmd.ExecuteReader(); // Выполнить запрос.
@@ -188,7 +188,7 @@ namespace TrainSchedule.Services
                 {
                     routeId = reader.GetInt32(0);
                 }
-                Ticket ticket = new Ticket(ticketId, avail, cost, rev.Id, passId, seatId, routeId); // Создать объект билета.
+                Ticket ticket = new Ticket(ticketId, avail, cost, review.Id, passId, seatId, routeId); // Создать объект билета.
                 return ticketRepository.Update(ticket); //Добавить билет в таблицу БД.
             }
             catch (MySqlException ex) // Иначе...
