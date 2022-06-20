@@ -64,6 +64,18 @@ namespace TrainSchedule
             AddPassanger(passenger);
         }
 
+        public void UpdateTicket()
+        {
+            int selectedRowIndex = tickets.SelectedCells[0].RowIndex; // Получить индекс обновляемой записи.                                                                       
+
+            // Удалить запись из таблицы.
+            tickets.Rows.RemoveAt(selectedRowIndex);
+            tickets.Refresh();
+
+            // Добавить обновлённую запись в таблицу.
+            AddTicket();
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             // Создать репозиторий для работы с таблицей Passengers БД.
@@ -189,6 +201,17 @@ namespace TrainSchedule
                 tickets.Rows.RemoveAt(selectedRowIndex);
                 tickets.Refresh();
             }
+        }
+
+        private void updateTicketBtn_Click(object sender, EventArgs e)
+        {
+            this.tickets.Enabled = false;
+            int column = 4;
+            int selectedRowIndex = tickets.SelectedCells[0].RowIndex; // Получить индекс обновляемой записи.
+            long id = Convert.ToInt32(tickets[column, selectedRowIndex].Value); // Получить значение, по которому нужно обновить запись в БД.
+
+            Update_ticket form = new Update_ticket(this, id);
+            form.ShowDialog();
         }
     }
 }
