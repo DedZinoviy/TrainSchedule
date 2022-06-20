@@ -54,7 +54,28 @@ namespace TrainSchedule.Repositories
 
         public Review GetByTicket(Ticket ticket)
         {
-            throw new NotImplementedException();
+            string sql = "SELECT * FROM trains.reviews WHERE idreviews = @id"; // Сформировать строку на получение отзыва по билету.
+            MySqlConnection connection = ConnectUtil.GetConnection(); //Создать соединение с MySql.
+            connection.Open(); //Открыть соединение.
+            try // Попытаться...
+            {
+                MySqlCommand command = new MySqlCommand(sql, connection); // Сформировать готовый запрос на получение отзыва по билету.
+                command.Parameters.AddWithValue("@id", ticket.Review_id); // Присвоить значения параметрам.
+                using MySqlDataReader reader = command.ExecuteReader(); // Выполнить запрос.
+                if (reader.Read()) // Пока есть элементы...
+                {
+                    long id = reader.GetInt32(0); // Получить данные.
+                    string name = reader.GetString(1);
+                    string comment = reader.GetString(2);
+                    float rating = reader.GetFloat(3);
+                    return new Review(id, name, comment, rating); // Вернуть объект отзыва
+                }
+                return null;
+            }
+            catch (MySqlException exception) // Иначе...
+            {
+                throw new RepositoryException(exception.ErrorCode, exception.Message); // Сообщить об ошибке.
+            }
         }
 
 
