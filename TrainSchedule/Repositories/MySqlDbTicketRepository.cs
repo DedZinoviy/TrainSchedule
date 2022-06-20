@@ -29,17 +29,17 @@ namespace TrainSchedule.Repositories
 
         public IEnumerable<Ticket> GetAll()
         {
-            List<Ticket> tickets = new List<Ticket>(); // Считать, что изначально в БД нет пассажиров.
-            string query = @"SELECT * FROM trains.tickets"; // Сформировать строку запроса на получение списка пассажиров.
+            List<Ticket> tickets = new List<Ticket>(); // Считать, что изначально в БД нет билетов.
+            string query = @"SELECT * FROM trains.tickets"; // Сформировать строку запроса на получение списка билетов.
             using MySqlConnection connection = ConnectUtil.GetConnection(); // Создать соединение с БД.
             connection.Open(); // Открыть соединение
             try // Попытаться...
             {
-                using MySqlCommand command = new MySqlCommand(query, connection); // Сформировать запрос на получение списка пассажиров.
+                using MySqlCommand command = new MySqlCommand(query, connection); // Сформировать запрос на получение списка билетов.
                 using MySqlDataReader reader = command.ExecuteReader();  // Выплнить запрос
                 while (reader.Read()) // Пока имеются полученные объекты...
                 {
-                    long idPassenger = reader.GetInt32(0); // Получить данные о пассажирах.
+                    long idTicket = reader.GetInt32(0); // Получить данные о билетах.
                     int availability = reader.GetInt32(1);
                     double cost = reader.GetDouble(2);
                     long review_id = reader.GetInt32(3);
@@ -47,7 +47,7 @@ namespace TrainSchedule.Repositories
                     long seat_id = reader.GetInt32(5);
                     long route_id = reader.GetInt32(6);
 
-                    tickets.Add(new Ticket(idPassenger, availability, cost, review_id, passenger_id, seat_id, route_id)); // Добавить сформированные объекты пассажиров в коллекцию.
+                    tickets.Add(new Ticket(idTicket, availability, cost, review_id, passenger_id, seat_id, route_id)); // Добавить сформированные объекты билетов в коллекцию.
                 }
                 return tickets; // Вернуть коллекцию.
             }
