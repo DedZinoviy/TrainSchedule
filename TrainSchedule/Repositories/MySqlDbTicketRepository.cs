@@ -14,7 +14,31 @@ namespace TrainSchedule.Repositories
     {
         public Ticket Append(Ticket newTicket)
         {
-            throw new NotImplementedException();
+            string sql = "INSERT INTO trains.tickets (ticket_availability,ticket_cost,passenger_id,review_id, seat_id, route_id) VALUES (@av, @cost, @pas, @review, @seat, @route)"; // Сформировать строку SQL-запроса на добавление данных в таблицу tickets.
+
+            using MySqlConnection connection = ConnectUtil.GetConnection(); // Создать соединение с БД MySql
+
+            connection.Open(); // Открыть соединение
+
+            try // Попытаться...
+            {
+                using MySqlCommand command = new MySqlCommand(sql, connection); // Сформировать готовый SQL-запрос на добавление в таблице tickets.
+                command.Parameters.AddWithValue("@av", newTicket.Availability); // Присвоить значения параметров SQL-запросу
+                command.Parameters.AddWithValue("@cost", newTicket.Cost);
+                command.Parameters.AddWithValue("@pas", newTicket.Passenger_id);
+                command.Parameters.AddWithValue("@review", newTicket.Review_id);
+                command.Parameters.AddWithValue("@seat", newTicket.Seat_id);
+                command.Parameters.AddWithValue("@route", newTicket.Route_id);
+
+                command.ExecuteNonQuery(); // Выполнить SQL-запрос
+                long localityId = command.LastInsertedId; // Узнать id объекта, который он получил в таблице БД
+                newTicket.Id = localityId; // Присвоить этот id экземпляру этого объекта внутри приложения
+                return newTicket; // Вернуть добавленный объект
+            }
+            catch (MySqlException exception) // Иначе... 
+            {
+                throw new RepositoryException(exception.ErrorCode, exception.Message); // Сообщить об ошибке
+            }
         }
 
         public Ticket Update(Ticket ticket)
