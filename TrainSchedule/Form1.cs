@@ -160,5 +160,35 @@ namespace TrainSchedule
             Add_ticket form = new Add_ticket(this);
             form.ShowDialog(this);
         }
+
+        private void tickets_SelectionChanged(object sender, EventArgs e)
+        {
+            if (this.tickets.CurrentRow != null) // Если никакая строка не выбрана
+            {
+                this.deleteTicketBtn.Enabled = true; // Разрешить удаление записей о билете.
+            }
+            else // Иначе...
+            {
+                this.deleteTicketBtn.Enabled = false; // Запретить удаление.
+            }
+        }
+
+        private void deleteTicketBtn_Click(object sender, EventArgs e)
+        {
+            if (this.tickets.CurrentRow != null)
+            {
+                int column = 4;
+                int selectedRowIndex = tickets.SelectedCells[0].RowIndex; // Получить индекс удляемой записи.
+                long id = Convert.ToInt32(tickets[column, selectedRowIndex].Value); // Получить значение, по которому нужно удалить запись из БД.
+
+                // Удалить запись из БД
+                DbTicketServices service = new DbTicketServices();
+                service.DeleteTicket(id);
+
+                // Удалить запись из таблицы.
+                tickets.Rows.RemoveAt(selectedRowIndex);
+                tickets.Refresh();
+            }
+        }
     }
 }

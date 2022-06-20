@@ -198,6 +198,7 @@
             this.tickets.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.tickets.Size = new System.Drawing.Size(543, 198);
             this.tickets.TabIndex = 7;
+            this.tickets.SelectionChanged += new System.EventHandler(this.tickets_SelectionChanged);
             // 
             // trainNumber
             // 
@@ -242,6 +243,7 @@
             this.deleteTicketBtn.TabIndex = 8;
             this.deleteTicketBtn.Text = "Удалить";
             this.deleteTicketBtn.UseVisualStyleBackColor = true;
+            this.deleteTicketBtn.Click += new System.EventHandler(this.deleteTicketBtn_Click);
             // 
             // Add_ticket_btn
             // 
