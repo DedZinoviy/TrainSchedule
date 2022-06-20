@@ -24,7 +24,27 @@ namespace TrainSchedule.Repositories
 
         public void Delete(Ticket ticket)
         {
+            try // Попытаться
+            {
+                string deleteTTS = "DELETE FROM trains.tickets_to_servcies WHERE ticket_id = @id"; // Сформировать строку запроса на удаление услуг, закреплённых за билетами.
+                MySqlConnection connection = ConnectUtil.GetConnection();
+                connection.Open(); // Открыть соединение.
+                using MySqlCommand ttsCommand = new MySqlCommand(deleteTTS, connection); // Сформировать готовый запрос на удаление прикреплённых услуг.
+                ttsCommand.Parameters.AddWithValue("@id", ticket.Id); // Присвоить значения переменной готовому SQL-запросу
+                ttsCommand.ExecuteNonQuery(); // Выполнить запрос.
 
+                connection.Close(); // Обновить соединение
+                connection.Open();
+
+                string query = "DELETE FROM trains.tickets WHERE idtickets = @id"; // Сформировать строку запроса на удаление записи о билете.
+                using MySqlCommand command = new MySqlCommand(query, connection); // Сформировать готовый запрос на удаление записи о билете.
+                command.Parameters.AddWithValue("@id", ticket.Id); // Присвоить значение переменной готовому SQL-запросу
+                command.ExecuteNonQuery(); // Выполнить запрос.
+            }
+            catch (MySqlException ex) // Иначе...
+            {
+                throw new RepositoryException(ex.ErrorCode, ex.Message); // Сообщить об ошибке.
+            }
         }
 
         public IEnumerable<Ticket> GetAll()
