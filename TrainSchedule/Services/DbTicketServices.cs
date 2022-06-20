@@ -119,5 +119,31 @@ namespace TrainSchedule.Services
                 throw ex;
             }
         }
+
+        public Ticket AppendNewTicket(long trainId, long seatId, long passId, float cost, int avail)
+        {
+            string sql = "SELECT id_routes FROM trains.routes WHERE train_id = @id"; // Сформировать строку запроса на получение id маршрута.
+            MySqlConnection conn = ConnectUtil.GetConnection(); // Создать соединение сБД MySql
+            long routeId = new long();
+            conn.Open(); // Открыть соединение с БД.
+            try // Попытаться...
+            {
+                var rev = new MySqlDbReviewRepository();
+                Review review = rev.Append(new Review(0, null, null, 0)); // Добавить пустой отзыв в таблицу reviews.
+                MySqlCommand cmd = new MySqlCommand(sql, conn); // Сформировать готовый запрос на получение id маршрута.
+                cmd.Parameters.AddWithValue("@id", trainId); // Присвоить значения параметров запросу.
+                using MySqlDataReader reader = cmd.ExecuteReader(); // Выполнить запрос.
+                while (reader.Read()) // Получить объект.
+                {
+                    routeId = reader.GetInt32(0);
+                }
+                Ticket ticket = new Ticket(0, avail, cost, review.Id, passId, seatId, routeId); // Создать объект билета.
+                return ticketRepository.Append(ticket); //Добавить билет в таблицу БД.
+            }
+            catch (MySqlException ex) // Иначе...
+            {
+                throw ex; // Сообщить об ошибке.
+            }
+        }
     }
 }
