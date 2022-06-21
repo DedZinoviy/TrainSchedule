@@ -68,6 +68,8 @@ namespace TrainSchedule
 
             this.wagons.Sort(wagonNumber, System.ComponentModel.ListSortDirection.Ascending); // Упорядочить таблицу.
             this.wagons.ClearSelection(); // Очистить выбор.
+            this.WagonsCount.Text = "";
+            this.PlacesCount.Text = "";
         }
 
         private void wagons_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -83,6 +85,17 @@ namespace TrainSchedule
             }
             this.places.Sort(placeNumber, System.ComponentModel.ListSortDirection.Ascending); // Упорядочить таблицу.
 
+        }
+
+        private void ShowBtn_Click(object sender, EventArgs e)
+        {
+            int selectedRowIndex = trains.SelectedCells[0].RowIndex; // Получить индекс текущей записи.
+            long num = Convert.ToInt32(trains[0, selectedRowIndex].Value); // Получить значение, по которому нужно найти запись из БД.
+            MySqlDbTrainRepository repository = new MySqlDbTrainRepository();
+            int placesCount;
+            int wagonsCount = repository.GetInfoAboutWagonsAndPlaces(new Train(num, "", num, false), out placesCount);
+            this.PlacesCount.Text = placesCount.ToString();
+            this.WagonsCount.Text = wagonsCount.ToString();
         }
     }
 }

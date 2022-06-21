@@ -42,6 +42,11 @@
             this.cost = new System.Windows.Forms.NumericUpDown();
             this.cost_label = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.WagonsCount = new System.Windows.Forms.TextBox();
+            this.WagonCountLabel = new System.Windows.Forms.Label();
+            this.PlacesCount = new System.Windows.Forms.TextBox();
+            this.PlacesCountLabel = new System.Windows.Forms.Label();
+            this.ShowBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trains)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.wagons)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.places)).BeginInit();
@@ -191,12 +196,61 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(158, 51);
             this.tableLayoutPanel1.TabIndex = 7;
             // 
+            // WagonsCount
+            // 
+            this.WagonsCount.Location = new System.Drawing.Point(84, 376);
+            this.WagonsCount.Name = "WagonsCount";
+            this.WagonsCount.ReadOnly = true;
+            this.WagonsCount.Size = new System.Drawing.Size(100, 23);
+            this.WagonsCount.TabIndex = 8;
+            // 
+            // WagonCountLabel
+            // 
+            this.WagonCountLabel.AutoSize = true;
+            this.WagonCountLabel.Location = new System.Drawing.Point(84, 358);
+            this.WagonCountLabel.Name = "WagonCountLabel";
+            this.WagonCountLabel.Size = new System.Drawing.Size(119, 15);
+            this.WagonCountLabel.TabIndex = 9;
+            this.WagonCountLabel.Text = "Количество вагонов";
+            // 
+            // PlacesCount
+            // 
+            this.PlacesCount.Location = new System.Drawing.Point(257, 376);
+            this.PlacesCount.Name = "PlacesCount";
+            this.PlacesCount.ReadOnly = true;
+            this.PlacesCount.Size = new System.Drawing.Size(100, 23);
+            this.PlacesCount.TabIndex = 10;
+            // 
+            // PlacesCountLabel
+            // 
+            this.PlacesCountLabel.AutoSize = true;
+            this.PlacesCountLabel.Location = new System.Drawing.Point(257, 358);
+            this.PlacesCountLabel.Name = "PlacesCountLabel";
+            this.PlacesCountLabel.Size = new System.Drawing.Size(101, 15);
+            this.PlacesCountLabel.TabIndex = 11;
+            this.PlacesCountLabel.Text = "Количество мест";
+            // 
+            // ShowBtn
+            // 
+            this.ShowBtn.Location = new System.Drawing.Point(84, 405);
+            this.ShowBtn.Name = "ShowBtn";
+            this.ShowBtn.Size = new System.Drawing.Size(75, 23);
+            this.ShowBtn.TabIndex = 12;
+            this.ShowBtn.Text = "Показать";
+            this.ShowBtn.UseVisualStyleBackColor = true;
+            this.ShowBtn.Click += new System.EventHandler(this.ShowBtn_Click);
+            // 
             // Add_ticket
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
+            this.Controls.Add(this.ShowBtn);
+            this.Controls.Add(this.PlacesCountLabel);
+            this.Controls.Add(this.PlacesCount);
+            this.Controls.Add(this.WagonCountLabel);
+            this.Controls.Add(this.WagonsCount);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.places);
             this.Controls.Add(this.wagons);
@@ -214,6 +268,7 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -233,5 +288,10 @@
         private NumericUpDown cost;
         private Label cost_label;
         private TableLayoutPanel tableLayoutPanel1;
+        private TextBox WagonsCount;
+        private Label WagonCountLabel;
+        private TextBox PlacesCount;
+        private Label PlacesCountLabel;
+        private Button ShowBtn;
     }
 }
