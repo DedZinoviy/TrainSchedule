@@ -61,9 +61,11 @@ namespace TrainSchedule.Services
                 List<Locality> arr = new List<Locality>();
                 List<DateTime> depTime = new List<DateTime>();
                 List<DateTime> arrTime = new List<DateTime>();
+                if(ticketCollection.Count() > 0)
+                command.Parameters.AddWithValue("@id", ticketCollection.First().Id); // Добавить параметр в переменную
                 foreach (var ticket in ticketCollection) // Для каждого билета...
                 {
-                    command.Parameters.AddWithValue("@id",ticket.Id); // Добавить параметр в переменную
+                    command.Parameters["@id"].Value=ticket.Id;
                     using MySqlDataReader reader = command.ExecuteReader(); // Считать объект из БД.
                     if (reader.Read())
                     {
