@@ -66,7 +66,18 @@ namespace TrainSchedule.Repositories
 
         public void Delete(Review review)
         {
-            throw new NotImplementedException();
+            try // Попытаться...
+            {   
+                MySqlConnection connection = ConnectUtil.GetConnection();
+                string query = "DELETE FROM trains.tickets WHERE idtickets = @id"; // Сформировать строку запроса на удаление записи об отзыве.
+                using MySqlCommand command = new MySqlCommand(query, connection); // Сформировать готовый запрос на удаление записи об отзыве.
+                command.Parameters.AddWithValue("@id", review.Id); // Присвоить значение переменной готовому SQL-запросу
+                command.ExecuteNonQuery(); // Выполнить запрос.
+            }
+            catch (MySqlException ex) // Иначе...
+            {
+                throw new RepositoryException(ex.ErrorCode, ex.Message); // Сообщить об ошибке.
+            }
         }
 
 
