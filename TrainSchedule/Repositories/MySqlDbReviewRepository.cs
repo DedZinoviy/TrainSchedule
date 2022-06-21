@@ -133,5 +133,33 @@ namespace TrainSchedule.Repositories
                 throw new RepositoryException(exception.ErrorCode, exception.Message); // сообщить об ошибке.
             }
         }
+
+        public IEnumerable<Review> GetAll()
+        {
+            List<Review> reviews = new List<Review>(); // Считать, что изначально в БД нет отзывов.
+            string query = @"SELECT * FROM trains.reviews"; // Сформировать строку запроса на получение списка отзывов.
+            using MySqlConnection connection = ConnectUtil.GetConnection(); // Создать соединение с БД.
+            connection.Open(); // Открыть соединение
+            try // Попытаться...
+            {
+                using MySqlCommand command = new MySqlCommand(query, connection); // Сформировать запрос на получение списка отзывов.
+                using MySqlDataReader reader = command.ExecuteReader();  // Выплнить запрос
+                while (reader.Read()) // Пока имеются полученные объекты...
+                {
+                    long idReview = reader.GetInt32(0); // Получить данные об отзывах.
+                    string Name = reader.GetString(1);
+                    string Text = reader.GetString(2);
+                    float Evaluation = reader.GetFloat(3);
+                    
+
+                    reviews.Add(new Review(idReview, Name, Text, Evaluation)); // Добавить сформированные объекты отзывов в коллекцию.
+                }
+                return reviews; // Вернуть коллекцию.
+            }
+            catch (MySqlException ex) // Иначе...
+            {
+                throw new RepositoryException(ex.ErrorCode, ex.Message); // Вывести исключение.
+            }
+        }
     }
 }

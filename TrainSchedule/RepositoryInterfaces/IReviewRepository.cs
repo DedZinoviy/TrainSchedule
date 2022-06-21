@@ -45,5 +45,11 @@ namespace TrainSchedule.RepositoryInterfaces
         /// <param name="train">Train to be evaluated.</param>
         /// <returns>Evaluation.</returns>
         public float GetAverageEvaluationByTrain(Train train);
+
+        /// <summary>
+        /// Allows to get list of all reviews in database.
+        /// </summary>
+        /// <returns>Collection of reviews</returns>
+        public IEnumerable<Review> GetAll();
     }
 }
