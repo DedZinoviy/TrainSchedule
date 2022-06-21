@@ -56,6 +56,18 @@
             this.SymmaryCostLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.reviews = new System.Windows.Forms.DataGridView();
+            this.ReviewName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ReviewMessage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ReviewEvaluation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.reviewId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.addReviewBtn = new System.Windows.Forms.Button();
+            this.DeleteReviewBtn = new System.Windows.Forms.Button();
+            this.UpdateReviewBtn = new System.Windows.Forms.Button();
+            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.passengers)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
@@ -64,6 +76,11 @@
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.reviews)).BeginInit();
+            this.tableLayoutPanel7.SuspendLayout();
+            this.tableLayoutPanel8.SuspendLayout();
+            this.tableLayoutPanel9.SuspendLayout();
+            this.tableLayoutPanel10.SuspendLayout();
             this.SuspendLayout();
             // 
             // Add_pass
@@ -71,7 +88,7 @@
             this.Add_pass.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Add_pass.Location = new System.Drawing.Point(3, 3);
             this.Add_pass.Name = "Add_pass";
-            this.Add_pass.Size = new System.Drawing.Size(142, 29);
+            this.Add_pass.Size = new System.Drawing.Size(134, 37);
             this.Add_pass.TabIndex = 1;
             this.Add_pass.Text = "Добавить";
             this.Add_pass.UseVisualStyleBackColor = true;
@@ -80,9 +97,9 @@
             // Delete_pass
             // 
             this.Delete_pass.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Delete_pass.Location = new System.Drawing.Point(151, 3);
+            this.Delete_pass.Location = new System.Drawing.Point(143, 3);
             this.Delete_pass.Name = "Delete_pass";
-            this.Delete_pass.Size = new System.Drawing.Size(173, 29);
+            this.Delete_pass.Size = new System.Drawing.Size(162, 37);
             this.Delete_pass.TabIndex = 2;
             this.Delete_pass.Text = "Удалить";
             this.Delete_pass.UseVisualStyleBackColor = true;
@@ -91,9 +108,9 @@
             // Update_pass
             // 
             this.Update_pass.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Update_pass.Location = new System.Drawing.Point(330, 3);
+            this.Update_pass.Location = new System.Drawing.Point(311, 3);
             this.Update_pass.Name = "Update_pass";
-            this.Update_pass.Size = new System.Drawing.Size(153, 29);
+            this.Update_pass.Size = new System.Drawing.Size(221, 37);
             this.Update_pass.TabIndex = 3;
             this.Update_pass.Text = "Редактировать";
             this.Update_pass.UseVisualStyleBackColor = true;
@@ -102,18 +119,18 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.15419F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.84581F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 158F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.41485F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.58515F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 226F));
             this.tableLayoutPanel1.Controls.Add(this.Add_pass, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.Update_pass, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.Delete_pass, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 205);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 200);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(486, 35);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(535, 43);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
             // passengers
@@ -137,7 +154,7 @@
             this.passengers.RowHeadersWidth = 51;
             this.passengers.RowTemplate.Height = 29;
             this.passengers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.passengers.Size = new System.Drawing.Size(486, 198);
+            this.passengers.Size = new System.Drawing.Size(535, 193);
             this.passengers.TabIndex = 5;
             this.passengers.SelectionChanged += new System.EventHandler(this.passengers_SelectionChanged);
             // 
@@ -183,13 +200,14 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.Controls.Add(this.passengers, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel1, 0, 1);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(12, 11);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 2);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 83.33334F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(492, 243);
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80.0813F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 19.9187F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(541, 246);
             this.tableLayoutPanel2.TabIndex = 6;
             // 
             // tickets
@@ -210,7 +228,7 @@
             this.tickets.RowHeadersVisible = false;
             this.tickets.RowTemplate.Height = 25;
             this.tickets.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.tickets.Size = new System.Drawing.Size(478, 196);
+            this.tickets.Size = new System.Drawing.Size(535, 192);
             this.tickets.TabIndex = 7;
             this.tickets.SelectionChanged += new System.EventHandler(this.tickets_SelectionChanged);
             // 
@@ -252,9 +270,9 @@
             // deleteTicketBtn
             // 
             this.deleteTicketBtn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.deleteTicketBtn.Location = new System.Drawing.Point(147, 3);
+            this.deleteTicketBtn.Location = new System.Drawing.Point(149, 3);
             this.deleteTicketBtn.Name = "deleteTicketBtn";
-            this.deleteTicketBtn.Size = new System.Drawing.Size(166, 29);
+            this.deleteTicketBtn.Size = new System.Drawing.Size(168, 34);
             this.deleteTicketBtn.TabIndex = 8;
             this.deleteTicketBtn.Text = "Удалить";
             this.deleteTicketBtn.UseVisualStyleBackColor = true;
@@ -265,7 +283,7 @@
             this.Add_ticket_btn.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Add_ticket_btn.Location = new System.Drawing.Point(3, 3);
             this.Add_ticket_btn.Name = "Add_ticket_btn";
-            this.Add_ticket_btn.Size = new System.Drawing.Size(138, 29);
+            this.Add_ticket_btn.Size = new System.Drawing.Size(140, 34);
             this.Add_ticket_btn.TabIndex = 9;
             this.Add_ticket_btn.Text = "Добавить";
             this.Add_ticket_btn.UseVisualStyleBackColor = true;
@@ -274,9 +292,9 @@
             // updateTicketBtn
             // 
             this.updateTicketBtn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.updateTicketBtn.Location = new System.Drawing.Point(319, 3);
+            this.updateTicketBtn.Location = new System.Drawing.Point(323, 3);
             this.updateTicketBtn.Name = "updateTicketBtn";
-            this.updateTicketBtn.Size = new System.Drawing.Size(156, 29);
+            this.updateTicketBtn.Size = new System.Drawing.Size(209, 34);
             this.updateTicketBtn.TabIndex = 10;
             this.updateTicketBtn.Text = "Редактировать";
             this.updateTicketBtn.UseVisualStyleBackColor = true;
@@ -287,16 +305,16 @@
             this.tableLayoutPanel3.ColumnCount = 3;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.56962F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.43038F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 161F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 214F));
             this.tableLayoutPanel3.Controls.Add(this.Add_ticket_btn, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.updateTicketBtn, 2, 0);
             this.tableLayoutPanel3.Controls.Add(this.deleteTicketBtn, 1, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 205);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 201);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(478, 35);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(535, 40);
             this.tableLayoutPanel3.TabIndex = 11;
             // 
             // tableLayoutPanel4
@@ -305,21 +323,22 @@
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel4.Controls.Add(this.tickets, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel3, 0, 1);
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(510, 11);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(550, 3);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 2;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 83.12757F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.87243F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(484, 243);
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 81.14754F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.85246F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(541, 244);
             this.tableLayoutPanel4.TabIndex = 12;
             // 
             // AverageRating
             // 
             this.AverageRating.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.AverageRating.Location = new System.Drawing.Point(3, 53);
+            this.AverageRating.Location = new System.Drawing.Point(3, 122);
             this.AverageRating.Name = "AverageRating";
             this.AverageRating.ReadOnly = true;
-            this.AverageRating.Size = new System.Drawing.Size(194, 23);
+            this.AverageRating.Size = new System.Drawing.Size(259, 23);
             this.AverageRating.TabIndex = 13;
             this.AverageRating.UseWaitCursor = true;
             this.AverageRating.Click += new System.EventHandler(this.AverageRating_Click);
@@ -328,7 +347,7 @@
             // 
             this.AvRagingLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.AvRagingLabel.AutoSize = true;
-            this.AvRagingLabel.Location = new System.Drawing.Point(52, 17);
+            this.AvRagingLabel.Location = new System.Drawing.Point(85, 52);
             this.AvRagingLabel.Name = "AvRagingLabel";
             this.AvRagingLabel.Size = new System.Drawing.Size(95, 15);
             this.AvRagingLabel.TabIndex = 14;
@@ -337,10 +356,10 @@
             // SummaryCost
             // 
             this.SummaryCost.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SummaryCost.Location = new System.Drawing.Point(3, 53);
+            this.SummaryCost.Location = new System.Drawing.Point(3, 122);
             this.SummaryCost.Name = "SummaryCost";
             this.SummaryCost.ReadOnly = true;
-            this.SummaryCost.Size = new System.Drawing.Size(194, 23);
+            this.SummaryCost.Size = new System.Drawing.Size(258, 23);
             this.SummaryCost.TabIndex = 15;
             this.SummaryCost.Click += new System.EventHandler(this.SummaryCost_Click);
             // 
@@ -348,7 +367,7 @@
             // 
             this.SymmaryCostLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.SymmaryCostLabel.AutoSize = true;
-            this.SymmaryCostLabel.Location = new System.Drawing.Point(45, 17);
+            this.SymmaryCostLabel.Location = new System.Drawing.Point(77, 52);
             this.SymmaryCostLabel.Name = "SymmaryCostLabel";
             this.SymmaryCostLabel.Size = new System.Drawing.Size(110, 15);
             this.SymmaryCostLabel.TabIndex = 16;
@@ -360,12 +379,13 @@
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel5.Controls.Add(this.AvRagingLabel, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.AverageRating, 0, 1);
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(218, 275);
+            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(273, 3);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 2;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(200, 100);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(265, 239);
             this.tableLayoutPanel5.TabIndex = 17;
             // 
             // tableLayoutPanel6
@@ -374,23 +394,163 @@
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel6.Controls.Add(this.SymmaryCostLabel, 0, 0);
             this.tableLayoutPanel6.Controls.Add(this.SummaryCost, 0, 1);
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(12, 275);
+            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 2;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(200, 100);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(264, 239);
             this.tableLayoutPanel6.TabIndex = 18;
+            // 
+            // reviews
+            // 
+            this.reviews.AllowUserToAddRows = false;
+            this.reviews.AllowUserToDeleteRows = false;
+            this.reviews.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.reviews.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ReviewName,
+            this.ReviewMessage,
+            this.ReviewEvaluation,
+            this.reviewId});
+            this.reviews.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.reviews.Location = new System.Drawing.Point(3, 3);
+            this.reviews.Name = "reviews";
+            this.reviews.ReadOnly = true;
+            this.reviews.RowHeadersVisible = false;
+            this.reviews.RowTemplate.Height = 25;
+            this.reviews.Size = new System.Drawing.Size(535, 194);
+            this.reviews.TabIndex = 19;
+            // 
+            // ReviewName
+            // 
+            this.ReviewName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ReviewName.HeaderText = "Название";
+            this.ReviewName.Name = "ReviewName";
+            this.ReviewName.ReadOnly = true;
+            // 
+            // ReviewMessage
+            // 
+            this.ReviewMessage.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ReviewMessage.HeaderText = "Сообщение";
+            this.ReviewMessage.Name = "ReviewMessage";
+            this.ReviewMessage.ReadOnly = true;
+            // 
+            // ReviewEvaluation
+            // 
+            this.ReviewEvaluation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ReviewEvaluation.HeaderText = "Оценка";
+            this.ReviewEvaluation.Name = "ReviewEvaluation";
+            this.ReviewEvaluation.ReadOnly = true;
+            // 
+            // reviewId
+            // 
+            this.reviewId.HeaderText = "";
+            this.reviewId.Name = "reviewId";
+            this.reviewId.ReadOnly = true;
+            this.reviewId.Visible = false;
+            // 
+            // addReviewBtn
+            // 
+            this.addReviewBtn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.addReviewBtn.Location = new System.Drawing.Point(3, 3);
+            this.addReviewBtn.Name = "addReviewBtn";
+            this.addReviewBtn.Size = new System.Drawing.Size(140, 33);
+            this.addReviewBtn.TabIndex = 20;
+            this.addReviewBtn.Text = "Добавить";
+            this.addReviewBtn.UseVisualStyleBackColor = true;
+            // 
+            // DeleteReviewBtn
+            // 
+            this.DeleteReviewBtn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DeleteReviewBtn.Location = new System.Drawing.Point(149, 3);
+            this.DeleteReviewBtn.Name = "DeleteReviewBtn";
+            this.DeleteReviewBtn.Size = new System.Drawing.Size(176, 33);
+            this.DeleteReviewBtn.TabIndex = 21;
+            this.DeleteReviewBtn.Text = "Удалить";
+            this.DeleteReviewBtn.UseVisualStyleBackColor = true;
+            // 
+            // UpdateReviewBtn
+            // 
+            this.UpdateReviewBtn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.UpdateReviewBtn.Location = new System.Drawing.Point(331, 3);
+            this.UpdateReviewBtn.Name = "UpdateReviewBtn";
+            this.UpdateReviewBtn.Size = new System.Drawing.Size(201, 33);
+            this.UpdateReviewBtn.TabIndex = 22;
+            this.UpdateReviewBtn.Text = "Редактировать";
+            this.UpdateReviewBtn.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel7
+            // 
+            this.tableLayoutPanel7.ColumnCount = 3;
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 44.5122F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55.4878F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 206F));
+            this.tableLayoutPanel7.Controls.Add(this.addReviewBtn, 0, 0);
+            this.tableLayoutPanel7.Controls.Add(this.UpdateReviewBtn, 2, 0);
+            this.tableLayoutPanel7.Controls.Add(this.DeleteReviewBtn, 1, 0);
+            this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 203);
+            this.tableLayoutPanel7.Name = "tableLayoutPanel7";
+            this.tableLayoutPanel7.RowCount = 1;
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(535, 39);
+            this.tableLayoutPanel7.TabIndex = 23;
+            // 
+            // tableLayoutPanel8
+            // 
+            this.tableLayoutPanel8.ColumnCount = 1;
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel8.Controls.Add(this.tableLayoutPanel7, 0, 1);
+            this.tableLayoutPanel8.Controls.Add(this.reviews, 0, 0);
+            this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel8.Location = new System.Drawing.Point(550, 253);
+            this.tableLayoutPanel8.Name = "tableLayoutPanel8";
+            this.tableLayoutPanel8.RowCount = 2;
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 81.63265F));
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.36735F));
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(541, 245);
+            this.tableLayoutPanel8.TabIndex = 24;
+            // 
+            // tableLayoutPanel9
+            // 
+            this.tableLayoutPanel9.ColumnCount = 2;
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel9.Controls.Add(this.tableLayoutPanel10, 0, 1);
+            this.tableLayoutPanel9.Controls.Add(this.tableLayoutPanel4, 1, 0);
+            this.tableLayoutPanel9.Controls.Add(this.tableLayoutPanel8, 1, 1);
+            this.tableLayoutPanel9.Controls.Add(this.tableLayoutPanel2, 0, 0);
+            this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel9.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel9.Name = "tableLayoutPanel9";
+            this.tableLayoutPanel9.RowCount = 2;
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(1094, 501);
+            this.tableLayoutPanel9.TabIndex = 25;
+            // 
+            // tableLayoutPanel10
+            // 
+            this.tableLayoutPanel10.ColumnCount = 2;
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel10.Controls.Add(this.tableLayoutPanel6, 0, 0);
+            this.tableLayoutPanel10.Controls.Add(this.tableLayoutPanel5, 1, 0);
+            this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel10.Location = new System.Drawing.Point(3, 253);
+            this.tableLayoutPanel10.Name = "tableLayoutPanel10";
+            this.tableLayoutPanel10.RowCount = 1;
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel10.Size = new System.Drawing.Size(541, 245);
+            this.tableLayoutPanel10.TabIndex = 26;
             // 
             // TrainSchedule
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1091, 470);
-            this.Controls.Add(this.tableLayoutPanel6);
-            this.Controls.Add(this.tableLayoutPanel5);
-            this.Controls.Add(this.tableLayoutPanel4);
-            this.Controls.Add(this.tableLayoutPanel2);
+            this.ClientSize = new System.Drawing.Size(1094, 501);
+            this.Controls.Add(this.tableLayoutPanel9);
             this.Name = "TrainSchedule";
             this.Text = "Train Schedule";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -404,6 +564,11 @@
             this.tableLayoutPanel5.PerformLayout();
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.reviews)).EndInit();
+            this.tableLayoutPanel7.ResumeLayout(false);
+            this.tableLayoutPanel8.ResumeLayout(false);
+            this.tableLayoutPanel9.ResumeLayout(false);
+            this.tableLayoutPanel10.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -437,5 +602,17 @@
         private Label SymmaryCostLabel;
         private TableLayoutPanel tableLayoutPanel5;
         private TableLayoutPanel tableLayoutPanel6;
+        private DataGridView reviews;
+        private DataGridViewTextBoxColumn ReviewName;
+        private DataGridViewTextBoxColumn ReviewMessage;
+        private DataGridViewTextBoxColumn ReviewEvaluation;
+        private DataGridViewTextBoxColumn reviewId;
+        private Button addReviewBtn;
+        private Button DeleteReviewBtn;
+        private Button UpdateReviewBtn;
+        private TableLayoutPanel tableLayoutPanel7;
+        private TableLayoutPanel tableLayoutPanel8;
+        private TableLayoutPanel tableLayoutPanel9;
+        private TableLayoutPanel tableLayoutPanel10;
     }
 }

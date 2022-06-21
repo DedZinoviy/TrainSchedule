@@ -147,9 +147,28 @@ namespace TrainSchedule.Repositories
                 while (reader.Read()) // Пока имеются полученные объекты...
                 {
                     long idReview = reader.GetInt32(0); // Получить данные об отзывах.
-                    string Name = reader.GetString(1);
-                    string Text = reader.GetString(2);
-                    float Evaluation = reader.GetFloat(3);
+                    string Name;
+                    string Text;
+                    float Evaluation;
+                    if (!reader.IsDBNull(1))
+                    {
+                        Name = reader.GetString(1);
+                    }
+                    else
+                    {
+                        Name = null;
+                    }
+                    if (!reader.IsDBNull(3))
+                    {
+                        Text = reader.GetString(3);
+                    }
+                    else
+                    {
+                        Text = null;
+                    }
+                    if(!reader.IsDBNull(2))
+                        Evaluation = reader.GetFloat(2);
+                    else Evaluation = 0;
                     
 
                     reviews.Add(new Review(idReview, Name, Text, Evaluation)); // Добавить сформированные объекты отзывов в коллекцию.

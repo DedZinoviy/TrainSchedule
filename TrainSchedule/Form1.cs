@@ -92,6 +92,17 @@ namespace TrainSchedule
             }
 
             this.passengers.Sort(last_name, System.ComponentModel.ListSortDirection.Ascending);  // Отсортировать таблицу.
+
+            IReviewRepository reviewer = new MySqlDbReviewRepository();
+            IEnumerable<Review> reviews = reviewer.GetAll();
+            foreach(Review review in reviews)
+            {
+                if (review.Id != 13)
+                {
+                    if (review.Name == null) review.Name = "[Пустой отзыв]";
+                    this.reviews.Rows.Add(review.Name, review.Description, review.Evaluation, review.Id);
+                }
+            }
         }
 
         private void Delete_pass_Click(object sender, EventArgs e)
