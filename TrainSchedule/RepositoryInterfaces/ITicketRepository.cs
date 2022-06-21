@@ -51,5 +51,12 @@ namespace TrainSchedule.RepositoryInterfaces
         /// <param name="trainNumber">Number of train whose ticket collection is to be returned.</param>
         /// <returns>Collection of train's tickets.</returns>
         public IEnumerable<Ticket> GetByTrainNumber(long trainNumber);
+
+        /// <summary>
+        /// Alliws to get summary passengers ticket cost.
+        /// </summary>
+        /// <param name="passenger"></param>
+        /// <returns>Summary Cost.</returns>
+        public float GetSummaryCost(Passenger passenger);
     }
 }

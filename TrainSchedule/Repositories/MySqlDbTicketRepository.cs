@@ -165,5 +165,29 @@ namespace TrainSchedule.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public float GetSummaryCost(Passenger passenger)
+        {
+            string sql = @"SELECT SUM(tc.ticket_cost) FROM trains.tickets AS tc
+                           JOIN trains.passangers AS p ON p.idpassangers = tc.passenger_id
+                           WHERE p.idpassangers = @id"; // Сформировать строку запроса на получение общей стоимости билетов.
+            MySqlConnection connection = ConnectUtil.GetConnection(); // Создать соединение с БД MySql.
+            connection.Open();// Открыть создинение
+            try // Попытаться...
+            {
+                MySqlCommand command = new MySqlCommand(sql, connection); //Сформировать готовый запрос.
+                command.Parameters.AddWithValue("@id", passenger.Id); // Присвоить значения параметров запросу.
+                using MySqlDataReader reader = command.ExecuteReader(); // Выполнить запрос.
+                if (reader.Read()) // Вернуть результат, если объект получен.
+                {
+                    return reader.GetFloat(0);
+                }
+                return 0;
+            }
+            catch(MySqlException ex) // Иначе...
+            {
+                throw new RepositoryException(ex.ErrorCode, ex.Message); // Сообщить об ошибке.
+            }
+        }
     }
 }
