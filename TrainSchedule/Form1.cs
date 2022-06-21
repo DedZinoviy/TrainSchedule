@@ -152,6 +152,7 @@ namespace TrainSchedule
                 this.Delete_pass.Enabled= false;
                 this.tickets.Rows.Clear(); // Очистить таблицу информации о билетах.
             }
+            this.SummaryCost.Text = "";
         }
 
         private void Update_pass_Click(object sender, EventArgs e)
@@ -177,12 +178,16 @@ namespace TrainSchedule
         {
             if (this.tickets.CurrentRow != null) // Если никакая строка не выбрана
             {
+                this.updateTicketBtn.Enabled = true;
                 this.deleteTicketBtn.Enabled = true; // Разрешить удаление записей о билете.
+              
             }
             else // Иначе...
             {
+                this.updateTicketBtn.Enabled = false;
                 this.deleteTicketBtn.Enabled = false; // Запретить удаление.
             }
+            this.AverageRating.Text = "";
         }
 
         private void deleteTicketBtn_Click(object sender, EventArgs e)
@@ -212,6 +217,44 @@ namespace TrainSchedule
 
             Update_ticket form = new Update_ticket(this, id);
             form.ShowDialog();
+        }
+
+        private void AverageRating_Click(object sender, EventArgs e)
+        {
+            if ((this.tickets.SelectedRows.Count > 0)&&(this.tickets.CurrentRow != null)) // Если выбран какой-либо билет.
+            {
+                MySqlDbReviewRepository rep = new MySqlDbReviewRepository();
+
+                int selectedRowIndex = tickets.SelectedCells[0].RowIndex; // Получить индекс требуемой записи.
+                long number = Convert.ToInt32(tickets[0, selectedRowIndex].Value); // Получить значение, по которому нужно получить данные из БД.
+
+                float rat = rep.GetAverageEvaluationByTrain(new Train(number, "", number, false));// Получить среднюю оценку обслуживания.
+                this.AverageRating.Text = rat.ToString(); // Вывести оценку в виджет
+            } 
+            else // Иначе...
+            {
+                //Считать ретинг равный 0;
+                float rating = 0;
+                this .AverageRating.Text = rating.ToString(); // Вывести оцнку в виджет.
+            }
+        }
+
+        private void SummaryCost_Click(object sender, EventArgs e)
+        {
+            if ((this.passengers.SelectedRows.Count > 0) && (this.tickets.SelectedRows.Count > 0)) // ЕСли выбран какой-либо пассажир.
+            {
+                int selectedRowIndex = passengers.SelectedCells[0].RowIndex; // Получить индекс требуемой записи.
+                long number = Convert.ToInt32(passengers[4, selectedRowIndex].Value); // Получить значение, по которому нужно получить данные из БД.
+
+                MySqlDbTicketRepository rep = new MySqlDbTicketRepository();
+                float cost = rep.GetSummaryCost(new Passenger(number,"","","","")); // Получить общую стоимость билетов.
+                this.SummaryCost.Text = cost.ToString(); // Вывести стоимость в виджет.
+            }
+            else // Иначе...
+            {
+                float cost = 0; //Считать общую стоимоть равной 0
+                this.SummaryCost.Text = cost.ToString(); //Вывести стоимость в виджет.
+            }
         }
     }
 }

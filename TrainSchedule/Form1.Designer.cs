@@ -50,12 +50,20 @@
             this.updateTicketBtn = new System.Windows.Forms.Button();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.AverageRating = new System.Windows.Forms.TextBox();
+            this.AvRagingLabel = new System.Windows.Forms.Label();
+            this.SummaryCost = new System.Windows.Forms.TextBox();
+            this.SymmaryCostLabel = new System.Windows.Forms.Label();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.passengers)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tickets)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // Add_pass
@@ -305,11 +313,82 @@
             this.tableLayoutPanel4.Size = new System.Drawing.Size(484, 243);
             this.tableLayoutPanel4.TabIndex = 12;
             // 
+            // AverageRating
+            // 
+            this.AverageRating.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.AverageRating.Location = new System.Drawing.Point(3, 53);
+            this.AverageRating.Name = "AverageRating";
+            this.AverageRating.ReadOnly = true;
+            this.AverageRating.Size = new System.Drawing.Size(194, 23);
+            this.AverageRating.TabIndex = 13;
+            this.AverageRating.UseWaitCursor = true;
+            this.AverageRating.Click += new System.EventHandler(this.AverageRating_Click);
+            // 
+            // AvRagingLabel
+            // 
+            this.AvRagingLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.AvRagingLabel.AutoSize = true;
+            this.AvRagingLabel.Location = new System.Drawing.Point(52, 17);
+            this.AvRagingLabel.Name = "AvRagingLabel";
+            this.AvRagingLabel.Size = new System.Drawing.Size(95, 15);
+            this.AvRagingLabel.TabIndex = 14;
+            this.AvRagingLabel.Text = "Средняя оценка";
+            // 
+            // SummaryCost
+            // 
+            this.SummaryCost.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SummaryCost.Location = new System.Drawing.Point(3, 53);
+            this.SummaryCost.Name = "SummaryCost";
+            this.SummaryCost.ReadOnly = true;
+            this.SummaryCost.Size = new System.Drawing.Size(194, 23);
+            this.SummaryCost.TabIndex = 15;
+            this.SummaryCost.Click += new System.EventHandler(this.SummaryCost_Click);
+            // 
+            // SymmaryCostLabel
+            // 
+            this.SymmaryCostLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.SymmaryCostLabel.AutoSize = true;
+            this.SymmaryCostLabel.Location = new System.Drawing.Point(45, 17);
+            this.SymmaryCostLabel.Name = "SymmaryCostLabel";
+            this.SymmaryCostLabel.Size = new System.Drawing.Size(110, 15);
+            this.SymmaryCostLabel.TabIndex = 16;
+            this.SymmaryCostLabel.Text = "Общая  стоимость";
+            // 
+            // tableLayoutPanel5
+            // 
+            this.tableLayoutPanel5.ColumnCount = 1;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.Controls.Add(this.AvRagingLabel, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.AverageRating, 0, 1);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(218, 275);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 2;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(200, 100);
+            this.tableLayoutPanel5.TabIndex = 17;
+            // 
+            // tableLayoutPanel6
+            // 
+            this.tableLayoutPanel6.ColumnCount = 1;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel6.Controls.Add(this.SymmaryCostLabel, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.SummaryCost, 0, 1);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(12, 275);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            this.tableLayoutPanel6.RowCount = 2;
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(200, 100);
+            this.tableLayoutPanel6.TabIndex = 18;
+            // 
             // TrainSchedule
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1091, 470);
+            this.Controls.Add(this.tableLayoutPanel6);
+            this.Controls.Add(this.tableLayoutPanel5);
             this.Controls.Add(this.tableLayoutPanel4);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Name = "TrainSchedule";
@@ -321,6 +400,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.tickets)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel5.ResumeLayout(false);
+            this.tableLayoutPanel5.PerformLayout();
+            this.tableLayoutPanel6.ResumeLayout(false);
+            this.tableLayoutPanel6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -348,5 +431,11 @@
         private Button updateTicketBtn;
         private TableLayoutPanel tableLayoutPanel3;
         private TableLayoutPanel tableLayoutPanel4;
+        private TextBox AverageRating;
+        private Label AvRagingLabel;
+        private TextBox SummaryCost;
+        private Label SymmaryCostLabel;
+        private TableLayoutPanel tableLayoutPanel5;
+        private TableLayoutPanel tableLayoutPanel6;
     }
 }
