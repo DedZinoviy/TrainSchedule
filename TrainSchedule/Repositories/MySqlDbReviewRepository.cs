@@ -42,7 +42,25 @@ namespace TrainSchedule.Repositories
 
         public Review Update(Review review)
         {
-            throw new NotImplementedException();
+            string sql = @"UPDATE trains.reviews SET review_name = @r_name, evaluation = @ev, comment = @com WHERE idreviews = @id"; // Сформировать строку SQL-запроса на обновление данных в таблице.
+            using MySqlConnection connection = ConnectUtil.GetConnection(); // Создать соединение с БД MySql
+            connection.Open(); // Открыть соединение.
+            try // Попытаться...
+            {
+                using MySqlCommand command = new MySqlCommand(sql, connection); // Сформировать готовый SQL-запрос на обновление записи в таблице reviews.
+                command.Parameters.AddWithValue("@r_name", review.Name); // Присвоить значения параметров SQL-запросу.
+                command.Parameters.AddWithValue("@ev", review.Evaluation);
+                command.Parameters.AddWithValue("@com", review.Description);
+                command.Parameters.AddWithValue("@id", review.Id);
+
+                command.ExecuteNonQuery(); // Выполнить  запрос.
+
+                return review; // Вернуть объект обновлённого отзыва.
+            }
+            catch (MySqlException exception) // Иначе...
+            {
+                throw new RepositoryException(exception.ErrorCode, exception.Message); // Сообщить об ошибке.
+            }
         }
 
 
